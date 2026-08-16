@@ -20,7 +20,16 @@ Since the website needs to be dynamic (users uploading images and data), a purel
 
 ### Frontend (User Interface)
 - **Framework**: [Next.js](https://nextjs.org/) (React) or [Vite](https://vitejs.dev/) with React. Next.js is great because it supports both static pages (for Info, Home) and dynamic API routes (for handling uploads).
-- **Styling**: Vanilla CSS, CSS Modules, or Tailwind CSS (if preferred) to create a premium, beautiful aesthetic. 
+- **Styling**: Vanilla CSS (CSS Modules) to create a premium, bespoke aesthetic, giving us maximum control over complex layouts (masonry) and micro-animations.
+
+## Design Decisions
+- **Color Palette**: A premium dark theme featuring vibrant gradients, paired with crisp white text and icons to ensure the artworks remain the focal point.
+- **Typography**: A modern, geometric font (e.g., Outfit) for a sleek and artistic aesthetic.
+- **Layout & Navigation**: A global Header containing the association's logo and a Burger Menu for mobile/desktop. The Footer will be exclusive to the Home page to keep other pages clean.
+- **Gallery UX**: A seamless Masonry grid. Artwork metadata (Title, Artist, and a Like Button) will appear via a smooth, dark gradient overlay when the user hovers over an image.
+- **Animations**: 
+  - Text: Staggered, letter-by-letter fade-ins for impactful headers.
+  - Interactions: Micro-animations (like a "pop" effect when clicking the Like heart) to make the UI feel responsive and alive.
 
 ### Backend & Database (Data & Storage)
 - **Database**: [Supabase](https://supabase.com/) or [Firebase](https://firebase.google.com/). These Backend-as-a-Service (BaaS) platforms provide a PostgreSQL/NoSQL database to store artwork metadata (titles, artist, etc.) out-of-the-box.
