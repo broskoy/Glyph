@@ -18,7 +18,7 @@ export default function RootLayout({
       <body>
         <InteractiveBackground />
         <Navigation />
-        <main style={{ minHeight: "calc(100vh - 80px)" }}>
+        <main style={{ minHeight: "calc(100vh - 80px)", position: "relative", zIndex: 1, isolation: "isolate" }}>
           {children}
         </main>
       </body>

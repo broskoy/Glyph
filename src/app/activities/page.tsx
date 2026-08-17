@@ -17,10 +17,11 @@ export default function Activities() {
             display: "flex", 
             justifyContent: "space-between", 
             alignItems: "center",
-            background: "var(--glass-bg)", 
+            background: "var(--bg-color)", 
             border: "1px solid var(--glass-border)", 
-            borderRadius: "16px", 
-            padding: "2rem" 
+            borderRadius: "24px", 
+            padding: "2rem",
+            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
           }}>
             <div>
               <p style={{ color: "var(--accent-1)", fontWeight: "bold", marginBottom: "0.5rem" }}>{event.date}</p>

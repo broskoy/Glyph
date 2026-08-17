@@ -5,7 +5,7 @@ export default function Info() {
         About the Association
       </h1>
       
-      <div style={{ background: "var(--glass-bg)", border: "1px solid var(--glass-border)", borderRadius: "16px", padding: "3rem" }}>
+      <div style={{ background: "var(--bg-color)", border: "1px solid var(--glass-border)", borderRadius: "24px", padding: "3rem", boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" }}>
         <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>Our Mission</h2>
         <p style={{ color: "var(--text-secondary)", marginBottom: "2rem", fontSize: "1.1rem" }}>
           The Glyph Art Association is a student-led collective dedicated to providing a platform for emerging artists to showcase their work, collaborate on interdisciplinary projects, and engage with the broader university community.

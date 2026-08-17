@@ -12,7 +12,7 @@ export default async function Gallery() {
   })
 
   return (
-    <div style={{ padding: "4rem 2rem", maxWidth: "1400px", margin: "0 auto" }}>
+    <div style={{ padding: "4rem 2rem", maxWidth: "1000px", margin: "0 auto" }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
         <h1 className="title-gradient" style={{ fontSize: '3rem', margin: 0 }}>
           Community Gallery
