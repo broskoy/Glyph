@@ -13,5 +13,6 @@ model Artwork {
   artist    String
   height    Int
   likes     Int      @default(0)
+  imageUrl  String   @default("")
   createdAt DateTime @default(now())
 }

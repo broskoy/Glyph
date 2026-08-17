@@ -1,0 +1,49 @@
+import { NextResponse } from 'next/server'
+import { prisma } from '@/lib/prisma'
+import { writeFile } from 'fs/promises'
+import path from 'path'
+import crypto from 'crypto'
+
+export async function POST(request: Request) {
+  try {
+    const formData = await request.formData();
+    const file = formData.get('file') as File;
+    const title = formData.get('title') as string;
+    const artist = formData.get('artist') as string;
+
+    if (!file || !title || !artist) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer());
+    
+    // Generate a unique filename so we don't overwrite files with the same name
+    const uniqueFilename = `${crypto.randomUUID()}-${file.name.replace(/\s+/g, '-')}`;
+    
+    // Determine the absolute path to the public/uploads directory
+    const uploadDir = path.join(process.cwd(), 'public/uploads');
+    const filePath = path.join(uploadDir, uniqueFilename);
+    
+    // Save the file to the local disk
+    await writeFile(filePath, buffer);
+
+    // Give it a random height between 250px and 550px for the masonry layout
+    const height = Math.floor(Math.random() * (550 - 250 + 1) + 250);
+
+    // Save the metadata to our SQLite database
+    const artwork = await prisma.artwork.create({
+      data: {
+        title,
+        artist,
+        height,
+        // The URL will just be the relative path to the public folder
+        imageUrl: `/uploads/${uniqueFilename}`
+      }
+    });
+
+    return NextResponse.json({ success: true, artwork });
+  } catch (error) {
+    console.error('Upload Error:', error);
+    return NextResponse.json({ error: 'Failed to upload artwork' }, { status: 500 });
+  }
+}

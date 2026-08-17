@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import styles from './Gallery.module.css';
 
 type Artwork = {
@@ -9,10 +10,16 @@ type Artwork = {
   artist: string;
   height: number;
   likes: number;
+  imageUrl: string;
 };
 
 export default function GalleryGrid({ initialArtworks }: { initialArtworks: Artwork[] }) {
   const [artworks, setArtworks] = useState<Artwork[]>(initialArtworks);
+
+  // When the parent Server Component refetches data after an upload, sync it to the client state
+  useEffect(() => {
+    setArtworks(initialArtworks);
+  }, [initialArtworks]);
 
   const handleLike = async (id: number) => {
     // Optimistic UI update: instantly increment the like count visually
@@ -34,8 +41,16 @@ export default function GalleryGrid({ initialArtworks }: { initialArtworks: Artw
     <div className={styles.masonryGrid}>
       {artworks.map((img) => (
         <div key={img.id} className={styles.masonryItem} style={{ height: `${img.height}px` }}>
-          {/* We use colorful CSS blocks as placeholder art for now */}
-          <div className={styles.imagePlaceholder} style={{ background: `linear-gradient(135deg, hsl(${img.id * 45}, 80%, 60%), hsl(${img.id * 45 + 40}, 80%, 50%))` }}></div>
+          
+          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <Image 
+              src={img.imageUrl} 
+              alt={img.title}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
           
           <div className={styles.overlay}>
             <div className={styles.metadata}>
