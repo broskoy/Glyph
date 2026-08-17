@@ -9,7 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@prisma/client": "^7.9.1",
+    "@libsql/client": "^0.17.4",
+    "@prisma/adapter-libsql": "^7.9.1",
+    "@prisma/client": "^5.22.0",
+    "dotenv": "^17.4.2",
     "next": "16.3.1",
     "react": "19.2.8",
     "react-dom": "19.2.8"
@@ -20,7 +23,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.1",
-    "prisma": "^7.9.1",
+    "prisma": "^5.22.0",
     "typescript": "^5"
   }
 }
