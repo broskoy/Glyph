@@ -43,31 +43,6 @@
   font-size: 1.2rem;
 }
 
-.desktopNav {
-  display: none;
-  gap: 2rem;
-}
-
-@media (min-width: 768px) {
-  .desktopNav {
-    display: flex;
-  }
-  .burgerBtn {
-    display: none !important;
-  }
-}
-
-.navLink {
-  color: var(--text-secondary);
-  font-weight: 600;
-  transition: color 0.2s ease;
-  font-size: 1.1rem;
-}
-
-.navLink:hover {
-  color: var(--accent-1);
-}
-
 /* Burger Menu Styles */
 .burgerBtn {
   display: flex;

@@ -19,14 +19,7 @@ export default function Header() {
           <span className={styles.logoText}>GLYPH</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className={styles.desktopNav}>
-          <Link href="/gallery" className={styles.navLink}>Gallery</Link>
-          <Link href="/activities" className={styles.navLink}>Activities</Link>
-          <Link href="/info" className={styles.navLink}>Info</Link>
-        </nav>
-
-        {/* Mobile Burger Icon */}
+        {/* Global Burger Icon */}
         <button className={styles.burgerBtn} onClick={toggleMenu} aria-label="Toggle menu">
           <div className={`${styles.burgerLine} ${isMenuOpen ? styles.open1 : ""}`}></div>
           <div className={`${styles.burgerLine} ${isMenuOpen ? styles.open2 : ""}`}></div>

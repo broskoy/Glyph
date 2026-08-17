@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Artwork {
+  id        Int      @id @default(autoincrement())
+  title     String
+  artist    String
+  height    Int
+  likes     Int      @default(0)
+  createdAt DateTime @default(now())
+}
