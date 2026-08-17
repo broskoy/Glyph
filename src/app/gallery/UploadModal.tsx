@@ -77,15 +77,21 @@ export default function UploadModal() {
   return (
     <>
       <button onClick={() => setIsOpen(true)} className="pop-hover" style={{
-        padding: '0.8rem 1.5rem',
-        background: 'rgba(255,255,255,0.1)',
-        border: '1px solid var(--glass-border)',
+        padding: '0.8rem 1.8rem',
+        background: 'var(--gradient-warm)',
+        border: 'none',
         borderRadius: '24px',
         color: 'white',
-        fontWeight: 'bold',
-        cursor: 'pointer'
+        fontWeight: '900',
+        fontSize: '1.5rem',
+        cursor: 'pointer',
+        boxShadow: '0 8px 20px rgba(255, 51, 102, 0.4)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem'
       }}>
-        + Submit Art
+        <span>POST</span>
+        <span style={{ fontSize: '2.5rem', lineHeight: 0.8, fontWeight: '400' }}>+</span>
       </button>
 
       {isOpen && (

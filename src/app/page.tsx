@@ -1,10 +1,8 @@
 import Footer from "../components/Footer";
-import InteractiveBackground from "../components/InteractiveBackground";
 
 export default function Home() {
   return (
     <>
-      <InteractiveBackground />
       <div style={{ padding: "4rem 2rem", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
         <h1 className="title-gradient" style={{ fontSize: "4rem", marginBottom: "1rem" }}>
           Welcome to Glyph

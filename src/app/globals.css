@@ -107,3 +107,20 @@ h3 {
 .animate-slide-down {
   animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Navigation Links */
+.nav-link-item {
+  display: inline-block;
+  background-size: 200% auto;
+}
+
+.nav-link-item:hover {
+  background-image: var(--gradient-warm);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulse-gradient 2s linear infinite;
+}
+
+@keyframes pulse-gradient {
+  to { background-position: 200% center; }
+}
