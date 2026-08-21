@@ -8,6 +8,7 @@ export default function Navigation() {
 
   const links = [
     { name: 'Home', href: '/' },
+    { name: 'People', href: '/people' },
     { name: 'Info', href: '/info' },
     { name: 'Activities', href: '/activities' },
     { name: 'Gallery', href: '/gallery' },
