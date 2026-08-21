@@ -3,9 +3,16 @@ import { prisma } from '@/lib/prisma'
 import { writeFile } from 'fs/promises'
 import path from 'path'
 import crypto from 'crypto'
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
 
 export async function POST(request: Request) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const formData = await request.formData();
     const file = formData.get('file') as File;
     const title = formData.get('title') as string;
@@ -34,7 +41,7 @@ export async function POST(request: Request) {
       data: {
         title,
         height,
-        userId: 1, // Temporary hardcode until NextAuth session is active
+        userId: parseInt((session.user as any).id), // Use the securely authenticated user ID
         imageUrl: `/uploads/${uniqueFilename}`
       }
     });
