@@ -1,4 +1,4 @@
-import CardStack from '../../components/CardStack';
+import CardCarousel from './CardCarousel';
 
 export default function PeoplePage() {
   return (
@@ -10,8 +10,8 @@ export default function PeoplePage() {
         Meet the members of Glyph by moving through the cards.
       </p>
 
-      {/* The interactive stack component */}
-      <CardStack />
+      {/* The interactive carousel component */}
+      <CardCarousel />
     </div>
   );
 }

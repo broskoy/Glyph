@@ -11,7 +11,7 @@ const MOCK_PEOPLE = [
   { id: 6, name: "David Chen", role: "Sculptor", email: "david@glyphart.edu", desc: "Experimenting with sustainable materials and 3D printing in modern sculpture." }
 ];
 
-export default function CardStack() {
+export default function CardCarousel() {
   const cards = MOCK_PEOPLE;
   const [activeIndex, setActiveIndex] = useState(0);
 

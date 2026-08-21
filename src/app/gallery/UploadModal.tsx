@@ -11,6 +11,12 @@ export default function UploadModal() {
   const [isClosing, setIsClosing] = useState(false);
   const [title, setTitle] = useState('');
   const [file, setFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [error, setError] = useState('');
+
+  const resetForm = () => {
+    setTitle('');
     setFile(null);
     setPreviewUrl(null);
     setError('');
