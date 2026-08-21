@@ -7,10 +7,11 @@ import styles from './Gallery.module.css';
 type Artwork = {
   id: number;
   title: string;
-  artist: string;
+  userId: number;
   height: number;
   likes: number;
   imageUrl: string;
+  user?: { username: string };
 };
 
 export default function GalleryGrid({ initialArtworks }: { initialArtworks: Artwork[] }) {
@@ -55,7 +56,7 @@ export default function GalleryGrid({ initialArtworks }: { initialArtworks: Artw
           <div className={styles.overlay}>
             <div className={styles.metadata}>
               <h3>{img.title}</h3>
-              <p>by {img.artist}</p>
+              <p>by {img.user?.username || 'Unknown'}</p>
             </div>
             <button 
               className={styles.likeBtn} 

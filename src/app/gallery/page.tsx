@@ -8,7 +8,8 @@ export const dynamic = 'force-dynamic'
 export default async function Gallery() {
   // We fetch securely on the server
   const artworks = await prisma.artwork.findMany({
-    orderBy: { createdAt: 'desc' }
+    orderBy: { createdAt: 'desc' },
+    include: { user: { select: { username: true } } }
   })
 
   return (

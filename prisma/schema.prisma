@@ -7,12 +7,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id             Int       @id @default(autoincrement())
+  username       String    @unique
+  hashedPassword String
+  role           String    @default("MEMBER") // Can be "MEMBER" or "ADMIN"
+  createdAt      DateTime  @default(now())
+  artworks       Artwork[]
+}
+
 model Artwork {
   id        Int      @id @default(autoincrement())
   title     String
-  artist    String
   height    Int
   likes     Int      @default(0)
   imageUrl  String   @default("")
   createdAt DateTime @default(now())
+  
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 }

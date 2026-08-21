@@ -10,15 +10,7 @@ export default function UploadModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [title, setTitle] = useState('');
-  const [artist, setArtist] = useState('');
   const [file, setFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
-  const [error, setError] = useState('');
-
-  const resetForm = () => {
-    setTitle('');
-    setArtist('');
     setFile(null);
     setPreviewUrl(null);
     setError('');
@@ -44,7 +36,7 @@ export default function UploadModal() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file || !title || !artist) {
+    if (!file || !title) {
       setError('Please fill in all fields and select an image.');
       return;
     }
@@ -54,7 +46,6 @@ export default function UploadModal() {
 
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('artist', artist);
     formData.append('file', file);
 
     try {
@@ -143,18 +134,6 @@ export default function UploadModal() {
                   type="text" 
                   value={title} 
                   onChange={e => setTitle(e.target.value)}
-                  style={{ padding: '1rem', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(0,0,0,0.3)', color: 'white' }}
-                  required
-                />
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label htmlFor="artist" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Artist Name</label>
-                <input 
-                  id="artist"
-                  type="text" 
-                  value={artist} 
-                  onChange={e => setArtist(e.target.value)}
                   style={{ padding: '1rem', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'rgba(0,0,0,0.3)', color: 'white' }}
                   required
                 />

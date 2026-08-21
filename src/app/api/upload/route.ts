@@ -9,9 +9,8 @@ export async function POST(request: Request) {
     const formData = await request.formData();
     const file = formData.get('file') as File;
     const title = formData.get('title') as string;
-    const artist = formData.get('artist') as string;
 
-    if (!file || !title || !artist) {
+    if (!file || !title) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -34,9 +33,8 @@ export async function POST(request: Request) {
     const artwork = await prisma.artwork.create({
       data: {
         title,
-        artist,
         height,
-        // The URL will just be the relative path to the public folder
+        userId: 1, // Temporary hardcode until NextAuth session is active
         imageUrl: `/uploads/${uniqueFilename}`
       }
     });
