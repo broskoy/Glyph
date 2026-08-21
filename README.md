@@ -1,6 +1,6 @@
-# Glyph Art Collective
+# Glyph Art Association
 
-A curated gallery and community platform for digital artists, photographers, and creatives.
+A gallery and community website for the artists at Glyph.
 
 ## Features
 - **Community Gallery:** A masonry grid displaying student artworks.
