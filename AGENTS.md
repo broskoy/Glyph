@@ -8,47 +8,45 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Glyph - Art Association Website
+# Glyph - Art Association Website (Documentation)
 
 ## Overview
-A dynamic website for the university's art association, allowing users to view information about the association and a gallery where users can post and view artworks.
+Glyph is a dynamic website built for a university art association. It serves as both an informational landing site for the organization and an interactive digital gallery where authenticated members can upload and showcase their artwork.
 
-## Pages
-1. **Home**: Landing page with highlights, latest news, or featured artworks.
-2. **Info**: About the association, members, how to join, contact info.
-3. **Activities**: Upcoming events, workshops, past activities.
-4. **Gallery**: The core dynamic feature. A masonry or grid layout displaying artworks uploaded by users. 
+## Current Architecture & Tech Stack
+The project evolved from a static prototype into a fully production-ready, serverless application.
 
-## Features
-- **User Authentication**: (Optional but recommended) Users might need to log in to post art, or maybe it's open (though that invites spam).
-- **Image Uploads**: Allowing users to upload image files (JPEG, PNG, etc.) for their artworks.
-- **Dynamic Data**: Storing information about each artwork (title, artist name, description, image URL).
+### Frontend
+- **Framework:** Next.js (App Router) & React.
+- **Styling:** Pure Vanilla CSS. The aesthetic strictly follows a dark, "glassmorphism" design system with vibrant gradients.
+- **Interactivity:** Relies heavily on CSS micro-animations (`pop-hover`, fade-ins) and a dynamic, fluid background component to make the UI feel alive.
 
-## Proposed Tech Stack (Architecture)
+### Backend & Infrastructure
+- **Hosting:** Vercel.
+- **Database:** Vercel Postgres, managed via the **Prisma ORM**.
+- **Image Storage:** Vercel Blob (direct cloud streaming for uploads).
+- **Authentication:** **NextAuth.js** (Credentials Provider). 
+  - Sessions are managed securely via JWTs.
+  - Passwords are encrypted using `bcryptjs`.
 
-Since the website needs to be dynamic (users uploading images and data), a purely static site won't be enough. Here is a recommended modern architecture that is easy to build and scale:
+## Core Features & Pages
 
-### Frontend (User Interface)
-- **Framework**: [Next.js](https://nextjs.org/) (React) or [Vite](https://vitejs.dev/) with React. Next.js is great because it supports both static pages (for Info, Home) and dynamic API routes (for handling uploads).
-- **Styling**: Vanilla CSS (CSS Modules) to create a premium, bespoke aesthetic, giving us maximum control over complex layouts (masonry) and micro-animations.
+1. **Home (`/`)**: Landing page featuring a staggered, letter-by-letter entrance animation for the "GLYPH" branding and an interactive background.
+2. **Gallery (`/gallery`)**: 
+   - A seamless masonry grid displaying uploaded artworks.
+   - **Upload Modal:** A secure popup allowing members to upload files (which stream directly to Vercel Blob).
+   - **Interactions:** Hovering over an artwork reveals its title, artist, and a "pop" animated Like button.
+3. **The Team (`/people`)**: Showcases the association's core members using a custom, interactive 3D `CardCarousel` UI.
+4. **Authentication & Roles**:
+   - **Guest**: Can view the site and gallery, but cannot upload or like art.
+   - **Member (`/login`)**: Authenticated users who can upload art and interact with the gallery.
+   - **Admin (`/admin`)**: A highly secure dashboard page restricted to administrators. Used to manually generate and securely encrypt new Member accounts (bypassing public registration to prevent spam).
+5. **Dynamic Navigation (`UserMenu.tsx`)**: The top right of the screen features a glassmorphic dropdown menu that dynamically renders Login/Logout/Admin options based on the user's current session state.
 
-## Design Decisions
-- **Color Palette**: A premium dark theme featuring vibrant gradients, paired with crisp white text and icons to ensure the artworks remain the focal point.
-- **Typography**: A modern, geometric font (e.g., Outfit) for a sleek and artistic aesthetic.
-- **Layout & Navigation**: A global Header containing the association's logo and a Burger Menu for mobile/desktop. The Footer will be exclusive to the Home page to keep other pages clean.
-- **Gallery UX**: A seamless Masonry grid. Artwork metadata (Title, Artist, and a Like Button) will appear via a smooth, dark gradient overlay when the user hovers over an image.
-- **Animations**: 
-  - Text: Staggered, letter-by-letter fade-ins for impactful headers.
-  - Interactions: Micro-animations (like a "pop" effect when clicking the Like heart) to make the UI feel responsive and alive.
+## Security & API Design
+- **Strict Server Verification:** API routes (like `/api/upload` and `/api/artworks/[id]/like`) use `getServerSession` to mathematically verify the user's token before interacting with the database.
+- **Foreign Keys:** Uploaded artworks are tied strictly to the authenticated `user.id` pulled from the secure server session, meaning users cannot spoof uploads as someone else.
 
-### Backend & Database (Data & Storage)
-- **Database**: [Supabase](https://supabase.com/) or [Firebase](https://firebase.google.com/). These Backend-as-a-Service (BaaS) platforms provide a PostgreSQL/NoSQL database to store artwork metadata (titles, artist, etc.) out-of-the-box.
-- **Storage**: We will need object storage (like AWS S3, Supabase Storage, or Firebase Storage) to actually host the image files uploaded by users.
-
-### Deployment
-- **Hosting**: [Vercel](https://vercel.com/) or [Netlify](https://www.netlify.com/). They are free, incredibly fast, and integrate perfectly with Next.js or Vite.
-
-## Development Phases
-1. **Phase 1: Static Prototyping** - Build the 4 pages statically to get the design and layout right.
-2. **Phase 2: Database Integration** - Set up the database and connect the Gallery page to fetch real data.
-3. **Phase 3: Upload Functionality** - Create the form for users to upload their artworks.
+## Maintenance Notes for Future Developers
+- **Prisma:** If you make changes to `prisma/schema.prisma`, remember to run `npx prisma db push` to sync with Vercel Postgres. Ensure `package.json` contains `"postinstall": "prisma generate"` to prevent Vercel caching errors.
+- **Styling Guidelines:** Do NOT introduce Tailwind CSS. Continue using the established Vanilla CSS design tokens (e.g., `var(--glass-bg)`, `var(--gradient-warm)`) located in `globals.css` to maintain the premium aesthetic.
