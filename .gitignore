@@ -46,3 +46,6 @@ next-env.d.ts
 # database
 *.db
 *.db-journal
+
+# AI Agent configuration
+.agents/
