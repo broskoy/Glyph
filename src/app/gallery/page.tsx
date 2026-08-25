@@ -13,9 +13,9 @@ export default async function Gallery() {
   })
 
   return (
-    <div style={{ padding: "clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem)", maxWidth: "1000px", margin: "0 auto" }}>
+    <div style={{ padding: "clamp(6rem, 10vw, 8rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem)", maxWidth: "1000px", margin: "0 auto" }}>
       <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', gap: '1rem' }}>
-        <h1 className="title-gradient" style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', margin: 0 }}>
+        <h1 className="title-gradient" style={{ fontSize: 'clamp(1.5rem, 5vw, 3rem)', margin: 0 }}>
           Community Gallery
         </h1>
         <UploadModal />

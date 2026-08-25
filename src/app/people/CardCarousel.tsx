@@ -32,7 +32,7 @@ export default function CardCarousel() {
   };
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "600px", display: "flex", justifyContent: "center", alignItems: "center", marginTop: "2rem" }}>
+    <div style={{ position: "relative", width: "100%", height: "clamp(450px, 70vh, 600px)", display: "flex", justifyContent: "center", alignItems: "center", marginTop: "1rem" }}>
       {cards.map((person, index) => {
         const offset = getOffset(index, activeIndex, cards.length);
         const isCenter = offset === 0;
@@ -53,8 +53,8 @@ export default function CardCarousel() {
             style={{
               position: "absolute",
               width: "100%",
-              maxWidth: "400px",
-              height: "500px",
+              maxWidth: "clamp(280px, 80vw, 400px)",
+              height: "clamp(400px, 60vh, 500px)",
               background: "rgba(255, 255, 255, 0.03)",
               backdropFilter: "blur(20px)",
               WebkitBackdropFilter: "blur(20px)",
@@ -76,7 +76,7 @@ export default function CardCarousel() {
             {/* Image Placeholder */}
             <div style={{
               width: "100%",
-              height: "320px",
+              height: "clamp(180px, 30vh, 260px)",
               background: "rgba(255,255,255,0.03)",
               border: "1px dashed rgba(255,255,255,0.2)",
               borderRadius: "16px",
@@ -91,8 +91,8 @@ export default function CardCarousel() {
               IMAGE PLACEHOLDER
             </div>
 
-            <h2 style={{ fontSize: "2rem", marginBottom: "0.2rem" }}>{person.name}</h2>
-            <p style={{ color: "var(--accent-1)", fontWeight: "bold", marginBottom: "0.5rem", letterSpacing: "0.05em", flex: 1 }}>{person.role}</p>
+            <h2 style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)", marginBottom: "0.2rem" }}>{person.name}</h2>
+            <p style={{ color: "var(--accent-1)", fontWeight: "bold", marginBottom: "clamp(1rem, 4vw, 2rem)", letterSpacing: "0.05em", fontSize: "clamp(0.9rem, 3vw, 1rem)" }}>{person.role}</p>
 
             <a
               href={`mailto:${person.email}`}

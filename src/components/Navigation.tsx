@@ -65,7 +65,7 @@ export default function Navigation() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        gap: '0.5rem',
+        gap: '0.2rem',
         pointerEvents: isOpen ? 'auto' : 'none',
       }}>
         {links.map((link, index) => (
@@ -75,7 +75,7 @@ export default function Navigation() {
             onClick={() => setIsOpen(false)}
             style={{
               color: 'rgba(255, 255, 255, 0.6)', // Faded white for better hierarchy
-              fontSize: 'clamp(1.5rem, 5vw, 2rem)',
+              fontSize: 'clamp(1rem, 4vw, 1.5rem)',
               fontWeight: '800',
               textTransform: 'uppercase',
               textDecoration: 'none',

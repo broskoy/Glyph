@@ -74,13 +74,13 @@ export default function UploadModal() {
   return (
     <>
       <button onClick={() => setIsOpen(true)} className="pop-hover" style={{
-        padding: '0.8rem 1.8rem',
+        padding: 'clamp(0.5rem, 2vw, 0.8rem) clamp(1rem, 4vw, 1.8rem)',
         background: 'var(--gradient-warm)',
         border: 'none',
         borderRadius: '24px',
         color: 'white',
         fontWeight: '900',
-        fontSize: '1.5rem',
+        fontSize: 'clamp(1rem, 3vw, 1.5rem)',
         cursor: 'pointer',
         boxShadow: '0 8px 20px rgba(255, 51, 102, 0.4)',
         display: 'flex',
@@ -88,7 +88,7 @@ export default function UploadModal() {
         gap: '0.5rem'
       }}>
         <span>POST</span>
-        <span style={{ fontSize: '2.5rem', lineHeight: 0.8, fontWeight: '400' }}>+</span>
+        <span style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', lineHeight: 0.8, fontWeight: '400' }}>+</span>
       </button>
 
       {isOpen && (
@@ -100,12 +100,12 @@ export default function UploadModal() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'rgba(0, 0, 0, 0.4)', // Much more subtle darkening
+          background: 'rgba(0, 0, 0, 0.2)', // Much more subtle darkening
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           zIndex: 1000,
-          padding: '2rem'
+          padding: 'clamp(1rem, 3vw, 2rem)'
         }} onClick={handleClose}>
           
           {/* Prevent clicks inside the modal from closing it */}
@@ -113,8 +113,10 @@ export default function UploadModal() {
             onClick={(e) => e.stopPropagation()} 
             className={isClosing ? 'animate-slide-down' : 'animate-slide-up'}
             style={{
-            background: 'var(--bg-color)',
-            padding: '3rem',
+            background: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            padding: 'clamp(1.5rem, 5vw, 3rem)',
             borderRadius: '24px',
             border: '1px solid var(--glass-border)',
             width: '100%',
@@ -124,8 +126,8 @@ export default function UploadModal() {
             overflowY: 'auto'
           }}>
             
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-              <h2 className="title-gradient" style={{ margin: 0, fontSize: '2rem' }}>Submit Artwork</h2>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'clamp(1rem, 4vw, 2rem)' }}>
+              <h2 className="title-gradient" style={{ margin: 0, fontSize: 'clamp(1.5rem, 5vw, 2rem)' }}>Submit Artwork</h2>
               <button onClick={handleClose} style={{ color: 'var(--text-secondary)', fontSize: '1.5rem' }}>✕</button>
             </div>
 
@@ -159,7 +161,7 @@ export default function UploadModal() {
                     background: previewUrl ? 'transparent' : 'rgba(0,0,0,0.3)',
                     position: 'relative',
                     overflow: 'hidden',
-                    minHeight: '200px',
+                    minHeight: 'clamp(120px, 30vh, 200px)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -191,12 +193,12 @@ export default function UploadModal() {
                 className="pop-hover"
                 style={{ 
                   marginTop: '1rem',
-                  padding: '1.2rem', 
+                  padding: 'clamp(0.8rem, 3vw, 1.2rem)', 
                   borderRadius: '8px', 
                   background: 'var(--text-primary)', 
                   color: 'black',
                   fontWeight: 'bold',
-                  fontSize: '1.1rem',
+                  fontSize: 'clamp(0.9rem, 3vw, 1.1rem)',
                   opacity: isUploading ? 0.7 : 1
                 }}
               >

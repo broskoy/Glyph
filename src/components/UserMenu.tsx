@@ -21,7 +21,7 @@ export default function UserMenu() {
   };
 
   return (
-    <div style={{ position: "fixed", top: "clamp(1rem, 3vw, 2rem)", right: "clamp(1rem, 3vw, 2rem)", zIndex: 100, display: "flex", gap: "clamp(0.5rem, 2vw, 1.5rem)" }}>
+    <div style={{ position: "fixed", top: "clamp(1rem, 3vw, 2rem)", right: "clamp(1rem, 3vw, 2rem)", zIndex: 100, display: "flex", gap: "clamp(1rem, 3vw, 2rem)" }}>
       
       {/* User Dropdown */}
       <div style={{ position: "relative" }}>
@@ -58,18 +58,19 @@ export default function UserMenu() {
             backdropFilter: "blur(20px)",
             border: "1px solid var(--glass-border)",
             borderRadius: "16px",
-            padding: "1.5rem",
-            width: "clamp(200px, 60vw, 250px)",
+            padding: "clamp(1rem, 3vw, 1.5rem)",
+            width: "clamp(160px, 50vw, 220px)",
             boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8)",
             display: "flex",
             flexDirection: "column",
-            gap: "1rem"
+            gap: "clamp(0.5rem, 2vw, 1rem)"
           }}>
             <div>
-              <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-secondary)" }}>Account</p>
+              <p style={{ margin: 0, fontSize: "clamp(0.7rem, 2vw, 0.9rem)", color: "var(--text-secondary)" }}>Account</p>
               <h3 style={{ 
                 margin: 0, 
                 fontWeight: "bold",
+                fontSize: "clamp(0.9rem, 3vw, 1.2rem)",
                 color: role === "ADMIN" ? "#00ff80" : role === "MEMBER" ? "white" : "var(--text-secondary)" 
               }}>
                 {session?.user ? session.user.name : "Guest"}
@@ -78,21 +79,21 @@ export default function UserMenu() {
 
             {status === "unauthenticated" ? (
               <Link href="/login" onClick={() => setIsUserMenuOpen(false)} style={{
-                textAlign: "center", padding: "0.8rem", borderRadius: "8px", background: "var(--gradient-warm)", color: "white", textDecoration: "none", fontWeight: "bold"
+                textAlign: "center", padding: "clamp(0.5rem, 2vw, 0.8rem)", fontSize: "clamp(0.8rem, 3vw, 1rem)", borderRadius: "8px", background: "var(--gradient-warm)", color: "white", textDecoration: "none", fontWeight: "bold"
               }}>
                 Log In
               </Link>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "clamp(0.4rem, 2vw, 0.8rem)" }}>
                 {role === "ADMIN" && (
                   <Link href="/admin" onClick={() => setIsUserMenuOpen(false)} style={{
-                    textAlign: "center", padding: "0.8rem", borderRadius: "8px", background: "rgba(255,255,255,0.1)", color: "white", textDecoration: "none", fontWeight: "bold"
+                    textAlign: "center", padding: "clamp(0.5rem, 2vw, 0.8rem)", fontSize: "clamp(0.8rem, 3vw, 1rem)", borderRadius: "8px", background: "rgba(255,255,255,0.1)", color: "white", textDecoration: "none", fontWeight: "bold"
                   }}>
                     Admin Dashboard
                   </Link>
                 )}
                 <button onClick={handleLogout} style={{
-                  padding: "0.8rem", borderRadius: "8px", background: "rgba(255, 107, 107, 0.2)", color: "#ff6b6b", border: "none", cursor: "pointer", fontWeight: "bold"
+                  padding: "clamp(0.5rem, 2vw, 0.8rem)", fontSize: "clamp(0.8rem, 3vw, 1rem)", borderRadius: "8px", background: "rgba(255, 107, 107, 0.2)", color: "#ff6b6b", border: "none", cursor: "pointer", fontWeight: "bold"
                 }}>
                   Log Out
                 </button>
@@ -139,12 +140,12 @@ export default function UserMenu() {
             backdropFilter: "blur(20px)",
             border: "1px solid var(--glass-border)",
             borderRadius: "16px",
-            padding: "1.5rem",
-            width: "clamp(200px, 60vw, 250px)",
+            padding: "clamp(1rem, 3vw, 1.5rem)",
+            width: "clamp(160px, 50vw, 220px)",
             boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8)",
             textAlign: "center"
           }}>
-            <p style={{ color: "var(--text-secondary)", margin: 0 }}>Fun customization features coming soon!</p>
+            <p style={{ color: "var(--text-secondary)", margin: 0, fontSize: "clamp(0.8rem, 3vw, 1rem)" }}>Fun customization features coming soon!</p>
           </div>
         )}
       </div>

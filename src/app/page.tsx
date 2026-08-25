@@ -10,7 +10,7 @@ export default function Home() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        padding: "clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem)", 
+        padding: "clamp(6rem, 10vw, 8rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem)", 
         textAlign: "center" 
       }}>
         
