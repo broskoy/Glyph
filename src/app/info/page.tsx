@@ -1,7 +1,7 @@
 export default function Info() {
   return (
-    <div style={{ padding: "4rem 2rem", maxWidth: "800px", margin: "0 auto" }}>
-      <h1 className="title-gradient" style={{ fontSize: "3.5rem", marginBottom: "2rem", textAlign: "center" }}>
+    <div style={{ padding: "clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem)", maxWidth: "800px", margin: "0 auto" }}>
+      <h1 className="title-gradient" style={{ fontSize: "clamp(2.5rem, 6vw, 3.5rem)", marginBottom: "2rem", textAlign: "center" }}>
         About Us
       </h1>
 

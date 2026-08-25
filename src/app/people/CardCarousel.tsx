@@ -36,7 +36,7 @@ export default function CardCarousel() {
       {cards.map((person, index) => {
         const offset = getOffset(index, activeIndex, cards.length);
         const isCenter = offset === 0;
-        
+
         let transformStr = `translateX(${offset * 75}%) scale(${1 - Math.abs(offset) * 0.15})`;
         let opacity = Math.abs(offset) > 1 ? 0 : (isCenter ? 1 : 0.5);
         let zIndex = 10 - Math.abs(offset);
@@ -47,7 +47,7 @@ export default function CardCarousel() {
         if (offset === -1) onClick = rotateLeft;
 
         return (
-          <div 
+          <div
             key={person.id}
             onClick={onClick}
             style={{
@@ -55,7 +55,9 @@ export default function CardCarousel() {
               width: "100%",
               maxWidth: "400px",
               height: "500px",
-              background: "var(--bg-color)",
+              background: "rgba(255, 255, 255, 0.03)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
               border: "1px solid var(--glass-border)",
               borderRadius: "24px",
               padding: "2rem",
@@ -67,17 +69,17 @@ export default function CardCarousel() {
               cursor,
               display: "flex",
               flexDirection: "column",
-              pointerEvents: opacity === 0 ? "none" : "auto", 
-              WebkitBackfaceVisibility: "hidden", 
+              pointerEvents: opacity === 0 ? "none" : "auto",
+              WebkitBackfaceVisibility: "hidden",
             }}
           >
             {/* Image Placeholder */}
-            <div style={{ 
-              width: "100%", 
-              height: "220px", 
-              background: "rgba(255,255,255,0.03)", 
+            <div style={{
+              width: "100%",
+              height: "320px",
+              background: "rgba(255,255,255,0.03)",
               border: "1px dashed rgba(255,255,255,0.2)",
-              borderRadius: "16px", 
+              borderRadius: "16px",
               marginBottom: "1.5rem",
               display: "flex",
               justifyContent: "center",
@@ -88,17 +90,16 @@ export default function CardCarousel() {
             }}>
               IMAGE PLACEHOLDER
             </div>
-            
+
             <h2 style={{ fontSize: "2rem", marginBottom: "0.2rem" }}>{person.name}</h2>
-            <p style={{ color: "var(--accent-1)", fontWeight: "bold", marginBottom: "1rem", letterSpacing: "0.05em" }}>{person.role}</p>
-            <p style={{ color: "var(--text-secondary)", fontSize: "1rem", marginBottom: "1rem", flex: 1 }}>{person.desc}</p>
-            
-            <a 
-              href={`mailto:${person.email}`} 
-              onClick={(e) => { 
+            <p style={{ color: "var(--accent-1)", fontWeight: "bold", marginBottom: "0.5rem", letterSpacing: "0.05em", flex: 1 }}>{person.role}</p>
+
+            <a
+              href={`mailto:${person.email}`}
+              onClick={(e) => {
                 if (index !== 0) e.preventDefault(); // Only click email on active center card
               }}
-              style={{ color: "white", fontWeight: "600", textDecoration: "underline", fontSize: "0.9rem", alignSelf: "flex-start" }}
+              style={{ color: "var(--text-secondary)", fontWeight: "600", textDecoration: "none", fontSize: "0.95rem", alignSelf: "flex-start" }}
             >
               {person.email}
             </a>

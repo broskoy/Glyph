@@ -21,7 +21,7 @@ export default function UserMenu() {
   };
 
   return (
-    <div style={{ position: "fixed", top: "2rem", right: "2rem", zIndex: 100, display: "flex", gap: "1.5rem" }}>
+    <div style={{ position: "fixed", top: "clamp(1rem, 3vw, 2rem)", right: "clamp(1rem, 3vw, 2rem)", zIndex: 100, display: "flex", gap: "clamp(0.5rem, 2vw, 1.5rem)" }}>
       
       {/* User Dropdown */}
       <div style={{ position: "relative" }}>
@@ -29,11 +29,11 @@ export default function UserMenu() {
           className="pop-hover"
           onClick={() => { setIsUserMenuOpen(!isUserMenuOpen); setIsSettingsOpen(false); }}
           style={{
-            background: "rgba(0,0,0,0.5)",
+            background: "rgba(255, 255, 255, 0.05)",
             border: "1px solid var(--glass-border)",
             borderRadius: "50%",
-            width: "3.5rem",
-            height: "3.5rem",
+            width: "clamp(2.5rem, 8vw, 3.5rem)",
+            height: "clamp(2.5rem, 8vw, 3.5rem)",
             color: "white",
             cursor: "pointer",
             display: "flex",
@@ -54,12 +54,12 @@ export default function UserMenu() {
             position: "absolute",
             top: "4.5rem",
             right: 0,
-            background: "rgba(0,0,0,0.8)",
+            background: "rgba(255, 255, 255, 0.03)",
             backdropFilter: "blur(20px)",
             border: "1px solid var(--glass-border)",
             borderRadius: "16px",
             padding: "1.5rem",
-            width: "250px",
+            width: "clamp(200px, 60vw, 250px)",
             boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8)",
             display: "flex",
             flexDirection: "column",
@@ -113,11 +113,11 @@ export default function UserMenu() {
           className="pop-hover"
           onClick={() => { setIsSettingsOpen(!isSettingsOpen); setIsUserMenuOpen(false); }}
           style={{
-            background: "rgba(0,0,0,0.5)",
+            background: "rgba(255, 255, 255, 0.05)",
             border: "1px solid var(--glass-border)",
             borderRadius: "50%",
-            width: "3.5rem",
-            height: "3.5rem",
+            width: "clamp(2.5rem, 8vw, 3.5rem)",
+            height: "clamp(2.5rem, 8vw, 3.5rem)",
             color: "white",
             cursor: "pointer",
             display: "flex",
@@ -140,12 +140,12 @@ export default function UserMenu() {
             position: "absolute",
             top: "4.5rem",
             right: 0,
-            background: "rgba(0,0,0,0.8)",
+            background: "rgba(255, 255, 255, 0.03)",
             backdropFilter: "blur(20px)",
             border: "1px solid var(--glass-border)",
             borderRadius: "16px",
             padding: "1.5rem",
-            width: "250px",
+            width: "clamp(200px, 60vw, 250px)",
             boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8)",
             textAlign: "center"
           }}>

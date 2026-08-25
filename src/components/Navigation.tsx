@@ -21,8 +21,8 @@ export default function Navigation() {
         className="pop-hover"
         style={{
           position: 'fixed',
-          top: '2rem',
-          left: '2rem',
+          top: 'clamp(1rem, 3vw, 2rem)',
+          left: 'clamp(1rem, 3vw, 2rem)',
           zIndex: 100,
           background: 'none',
           border: 'none',
@@ -34,9 +34,9 @@ export default function Navigation() {
         }}
       >
         <span style={{
-          fontSize: '2.5rem',
+          fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
           display: 'inline-block',
-          width: '2.5rem', // Fixed width prevents the text next to it from shifting
+          width: 'clamp(1.5rem, 5vw, 2.5rem)', // Fixed width prevents the text next to it from shifting
           textAlign: 'center',
           lineHeight: 1,
           transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -46,7 +46,7 @@ export default function Navigation() {
           {isOpen ? '✕' : '☰'}
         </span>
         <span style={{
-          fontSize: '2rem',
+          fontSize: 'clamp(1.2rem, 4vw, 2rem)',
           fontWeight: '800',
           letterSpacing: '0.2em',
           textTransform: 'uppercase',
@@ -59,8 +59,8 @@ export default function Navigation() {
       {/* The transparent container floating over the page */}
       <div style={{
         position: 'fixed',
-        top: '5.5rem',
-        left: '2rem',
+        top: 'clamp(3.5rem, 8vw, 5.5rem)',
+        left: 'clamp(1rem, 3vw, 2rem)',
         zIndex: 99,
         display: 'flex',
         flexDirection: 'column',
@@ -75,7 +75,7 @@ export default function Navigation() {
             onClick={() => setIsOpen(false)}
             style={{
               color: 'rgba(255, 255, 255, 0.6)', // Faded white for better hierarchy
-              fontSize: '2rem',
+              fontSize: 'clamp(1.5rem, 5vw, 2rem)',
               fontWeight: '800',
               textTransform: 'uppercase',
               textDecoration: 'none',

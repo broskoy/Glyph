@@ -51,7 +51,9 @@ export default function LoginPage() {
       <div
         className="animate-fade-in"
         style={{
-          background: "var(--bg-color)",
+          background: "rgba(255, 255, 255, 0.03)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
           padding: "4rem 3rem",
           borderRadius: "24px",
           border: "1px solid var(--glass-border)",
