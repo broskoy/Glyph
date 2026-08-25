@@ -66,20 +66,15 @@ export default function UserMenu() {
             gap: "1rem"
           }}>
             <div>
-              <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-secondary)" }}>Status</p>
-              <h3 style={{ margin: 0, color: role === "ADMIN" ? "#00ff80" : "white" }}>
-                {role === "ADMIN" ? "Administrator" : role === "MEMBER" ? "Member" : "Guest"}
+              <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-secondary)" }}>Account</p>
+              <h3 style={{ 
+                margin: 0, 
+                fontWeight: "bold",
+                color: role === "ADMIN" ? "#00ff80" : role === "MEMBER" ? "white" : "var(--text-secondary)" 
+              }}>
+                {session?.user ? session.user.name : "Guest"}
               </h3>
             </div>
-
-            {session?.user && (
-              <div>
-                <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-secondary)" }}>Logged in as</p>
-                <p style={{ margin: 0, fontWeight: "bold" }}>{session.user.name}</p>
-              </div>
-            )}
-            
-            <hr style={{ border: "none", borderTop: "1px solid var(--glass-border)", margin: "0.5rem 0" }} />
 
             {status === "unauthenticated" ? (
               <Link href="/login" onClick={() => setIsUserMenuOpen(false)} style={{
