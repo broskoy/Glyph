@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function AdminForm() {
+export default function AddForm({ onClose, onSuccess }: { onClose?: () => void, onSuccess?: () => void }) {
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("MEMBER");
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +26,7 @@ export default function AdminForm() {
       } else {
         setResult({ username: data.user.username, password: data.generatedPassword });
         setUsername("");
+        if (onSuccess) onSuccess();
       }
     } catch (err) {
       setResult({ error: "Failed to create user" });
@@ -35,8 +36,11 @@ export default function AdminForm() {
   };
 
   return (
-    <div style={{ background: "rgba(255,255,255,0.05)", padding: "2rem", borderRadius: "16px", border: "1px solid var(--glass-border)" }}>
-      <h2 style={{ marginTop: 0, marginBottom: "1.5rem" }}>Generate New Member</h2>
+    <div style={{ padding: "1rem" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
+        <h2 style={{ margin: 0 }}>Add New Member</h2>
+        {onClose && <button onClick={onClose} style={{ background: "none", border: "none", color: "var(--text-secondary)", fontSize: "1.5rem", cursor: "pointer" }}>✕</button>}
+      </div>
 
       <form onSubmit={handleCreate} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <div>
@@ -45,7 +49,7 @@ export default function AdminForm() {
             type="text"
             value={username}
             onChange={e => setUsername(e.target.value)}
-            placeholder="Enter student username"
+            placeholder="Enter username"
             required
             style={{ width: "100%", padding: "1rem", borderRadius: "8px", border: "1px solid var(--glass-border)", background: "rgba(0,0,0,0.3)", color: "white" }}
           />
@@ -58,8 +62,8 @@ export default function AdminForm() {
             onChange={e => setRole(e.target.value)}
             style={{ width: "100%", padding: "1rem", borderRadius: "8px", border: "1px solid var(--glass-border)", background: "rgba(0,0,0,0.3)", color: "white" }}
           >
-            <option value="MEMBER">Member (Can upload & like art)</option>
-            <option value="ADMIN">Admin (Can manage users)</option>
+            <option value="MEMBER">Member</option>
+            <option value="ADMIN">Admin</option>
           </select>
         </div>
 

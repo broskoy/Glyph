@@ -1,7 +1,8 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import AdminForm from "./AdminForm";
+import { prisma } from "@/lib/prisma";
+import UserList from "./UserList";
 
 export default async function AdminDashboard() {
   const session = await getServerSession(authOptions);
@@ -11,11 +12,23 @@ export default async function AdminDashboard() {
   if (!session || (session.user as any).role !== "ADMIN") {
     redirect("/"); 
   }
+  // Fetch all users for the dashboard
+  const users = await prisma.user.findMany({
+    orderBy: { createdAt: "desc" }
+  });
+
+  // Map to plain objects to avoid passing Date objects directly to client components
+  const plainUsers = users.map(u => ({
+    id: u.id,
+    username: u.username,
+    role: u.role,
+    createdAt: u.createdAt.toISOString()
+  }));
 
   return (
-    <div style={{ padding: "4rem 2rem", maxWidth: "800px", margin: "0 auto" }}>
+    <div style={{ padding: "4rem 2rem", maxWidth: "900px", margin: "0 auto" }}>
       <h1 className="title-gradient" style={{ fontSize: "3rem", marginBottom: "2rem" }}>Admin Dashboard</h1>
-      <AdminForm />
+      <UserList initialUsers={plainUsers} currentUserId={parseInt((session.user as any).id)} />
     </div>
   );
 }
