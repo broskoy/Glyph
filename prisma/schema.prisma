@@ -27,3 +27,13 @@ model Artwork {
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
 }
+
+model Activity {
+  id          Int      @id @default(autoincrement())
+  title       String
+  date        String
+  time        String?
+  location    String
+  description String?
+  createdAt   DateTime @default(now())
+}
