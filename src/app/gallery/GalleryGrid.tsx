@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Gallery.module.css';
 
 type Artwork = {
@@ -17,6 +18,8 @@ type Artwork = {
 
 export default function GalleryGrid({ initialArtworks }: { initialArtworks: Artwork[] }) {
   const [artworks, setArtworks] = useState<Artwork[]>(initialArtworks);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [ratios, setRatios] = useState<Record<number, number>>({});
 
   // When the parent Server Component refetches data after an upload, sync it to the client state
   useEffect(() => {
@@ -57,37 +60,140 @@ export default function GalleryGrid({ initialArtworks }: { initialArtworks: Artw
     }
   };
 
+  const handleImageLoad = (id: number, e: React.SyntheticEvent<HTMLImageElement>) => {
+    const { naturalWidth, naturalHeight } = e.currentTarget;
+    let ratio = naturalWidth / naturalHeight;
+    
+    // Max wide limit: 1 (Square) - prevents title/like button from covering the whole image
+    if (ratio > 1) ratio = 1;
+    
+    // Max tall limit: 0.6 (3:5 Portrait) - prevents phone screenshots from being endlessly tall
+    if (ratio < 0.6) ratio = 0.6;
+    
+    setRatios(prev => ({ ...prev, [id]: ratio }));
+  };
+
+  const selectedArt = artworks.find(a => a.id === selectedId);
+
   return (
-    <div className={styles.masonryGrid}>
-      {artworks.map((img) => (
-        <div key={img.id} className={styles.masonryItem} style={{ height: `${img.height}px` }}>
-          
-          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-            <Image 
-              src={img.imageUrl} 
-              alt={img.title}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{ objectFit: 'cover' }}
-            />
-          </div>
-          
-          <div className={styles.overlay}>
-            <div className={styles.metadata}>
-              <h3>{img.title}</h3>
-              <p>by {img.user?.username || 'Unknown'}</p>
-            </div>
-            <button 
-              className={styles.likeBtn} 
-              onClick={() => handleLike(img.id)}
-              aria-label="Like artwork"
-              style={{ color: img.hasLiked ? "var(--gradient-warm)" : "white" }}
+    <>
+      <div className={styles.masonryGrid}>
+        {artworks.map((img) => {
+          const ratio = ratios[img.id];
+          return (
+            <motion.div 
+              key={img.id} 
+              className={styles.masonryItem} 
+              onClick={() => setSelectedId(img.id)}
             >
-              <span style={{ fontSize: '1.2rem', marginRight: '0.4rem', color: 'white' }}>{img.likesCount}</span> {img.hasLiked ? "♥" : "♡"}
-            </button>
-          </div>
-        </div>
-      ))}
-    </div>
+              <img 
+                src={img.imageUrl} 
+                alt={img.title}
+                onLoad={(e) => handleImageLoad(img.id, e)}
+                style={{ 
+                  width: '100%', 
+                  height: 'auto', 
+                  display: 'block', 
+                  aspectRatio: ratio ? `${ratio}` : 'auto',
+                  objectFit: ratio ? 'cover' : 'initial',
+                  transition: 'opacity 0.2s ease',
+                  opacity: ratio ? 1 : 0 // Hide slightly until ratio is calculated to prevent jump
+                }}
+              />
+            
+            <div className={styles.overlay}>
+              <div className={styles.metadata}>
+                <h3>{img.title}</h3>
+                <p>by {img.user?.username || 'Unknown'}</p>
+              </div>
+              <button 
+                className={styles.likeBtn} 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleLike(img.id);
+                }}
+                aria-label="Like artwork"
+                style={{ color: img.hasLiked ? "var(--gradient-warm)" : "white" }}
+              >
+                <span style={{ fontSize: '1.2rem', marginRight: '0.4rem', color: 'white' }}>{img.likesCount}</span> {img.hasLiked ? "♥" : "♡"}
+              </button>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      <AnimatePresence>
+        {selectedId && selectedArt && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: 'fixed',
+              top: 0, left: 0, right: 0, bottom: 0,
+              background: 'transparent',
+              backdropFilter: 'blur(10px)',
+              zIndex: 1000,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: 'clamp(1rem, 5vw, 4rem)'
+            }}
+            onClick={() => setSelectedId(null)}
+          >
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              style={{
+                width: '90%',
+                maxWidth: '1200px',
+                height: '80vh',
+                position: 'relative',
+                background: 'transparent',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                <Image 
+                  src={selectedArt.imageUrl} 
+                  alt={selectedArt.title}
+                  fill
+                  style={{ objectFit: 'contain' }}
+                />
+              </div>
+
+              <button 
+                onClick={() => setSelectedId(null)}
+                style={{ 
+                  position: 'absolute', 
+                  top: 'clamp(2rem, 5vw, 3rem)', 
+                  right: 'clamp(1.5rem, 5vw, 3rem)', 
+                  background: 'rgba(255,255,255,0.1)', 
+                  color: 'white', 
+                  border: '1px solid rgba(255,255,255,0.2)', 
+                  borderRadius: '50%', 
+                  width: '44px', 
+                  height: '44px', 
+                  cursor: 'pointer', 
+                  fontSize: '1.5rem', 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  alignItems: 'center',
+                  backdropFilter: 'blur(5px)'
+                }}
+              >
+                ✕
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
