@@ -13,19 +13,20 @@ model User {
   hashedPassword String
   role           String    @default("MEMBER") // Can be "MEMBER" or "ADMIN"
   createdAt      DateTime  @default(now())
-  artworks       Artwork[]
+  artworks       Artwork[] @relation("UserArtworks")
+  likedArtworks  Artwork[] @relation("UserLikes")
 }
 
 model Artwork {
   id        Int      @id @default(autoincrement())
   title     String
   height    Int
-  likes     Int      @default(0)
   imageUrl  String   @default("")
   createdAt DateTime @default(now())
   
   userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation("UserArtworks", fields: [userId], references: [id])
+  likedBy   User[]   @relation("UserLikes")
 }
 
 model Activity {
