@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import styles from './Info.module.css';
 
 const MOCK_PEOPLE = [
   { id: 1, name: "Alex Mercer", role: "Digital Artist", email: "alex@glyphart.edu", desc: "Specializes in surreal digital landscapes and 3D modeling." },
@@ -32,7 +33,7 @@ export default function CardCarousel() {
   };
 
   return (
-    <div className="carousel-container" style={{ position: "relative", width: "100%", display: "flex", justifyContent: "center", alignItems: "center", marginTop: "0rem", marginBottom: "1rem" }}>
+    <div className={styles.carouselContainer} style={{ position: "relative", width: "100%", display: "flex", justifyContent: "center", alignItems: "center", marginTop: "0rem", marginBottom: "1rem" }}>
       {cards.map((person, index) => {
         const offset = getOffset(index, activeIndex, cards.length);
         const isCenter = offset === 0;
@@ -50,7 +51,7 @@ export default function CardCarousel() {
           <div
             key={person.id}
             onClick={onClick}
-            className="carousel-card"
+            className={styles.carouselCard}
             style={{
               position: "absolute",
               width: "100%",
@@ -72,7 +73,7 @@ export default function CardCarousel() {
             }}
           >
             {/* Image Placeholder */}
-            <div className="carousel-image" style={{
+            <div className={styles.carouselImage} style={{
               width: "100%",
               background: "rgba(255,255,255,0.03)",
               border: "1px dashed rgba(255,255,255,0.2)",
@@ -87,15 +88,15 @@ export default function CardCarousel() {
               IMAGE PLACEHOLDER
             </div>
 
-            <h2 className="carousel-name" style={{ marginBottom: "0rem" }}>{person.name}</h2>
-            <p className="carousel-role" style={{ color: "var(--accent-1)", fontWeight: "bold", marginBottom: "0.2rem", letterSpacing: "0.05em" }}>{person.role}</p>
+            <h2 className={styles.carouselName} style={{ marginBottom: "0rem" }}>{person.name}</h2>
+            <p className={styles.carouselRole} style={{ color: "var(--accent-1)", fontWeight: "bold", marginBottom: "0.2rem", letterSpacing: "0.05em" }}>{person.role}</p>
 
             <a
               href={`mailto:${person.email}`}
               onClick={(e) => {
                 if (index !== 0) e.preventDefault(); // Only click email on active center card
               }}
-              className="carousel-email"
+              className={styles.carouselEmail}
               style={{ color: "var(--text-secondary)", fontWeight: "600", textDecoration: "none", alignSelf: "flex-start" }}
             >
               {person.email}
