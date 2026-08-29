@@ -10,9 +10,11 @@ type Activity = {
   location: string;
   description: string | null;
 };
+import ActivityFormModal from "./ActivityFormModal";
 
-export default function ActivityCard({ event }: { event: Activity }) {
+export default function ActivityCard({ event, isAdmin = false }: { event: Activity, isAdmin?: boolean }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   return (
     <>
@@ -36,19 +38,43 @@ export default function ActivityCard({ event }: { event: Activity }) {
           <h2 style={{ fontSize: "clamp(1.2rem, 4vw, 1.8rem)", marginBottom: "0.5rem" }}>{event.title}</h2>
           <p style={{ color: "var(--text-secondary)", fontSize: "clamp(0.9rem, 3vw, 1rem)" }}>📍 {event.location}</p>
         </div>
-        <button 
-          onClick={() => setIsModalOpen(true)}
-          style={{
-            background: "transparent",
-            border: "1px solid var(--text-primary)",
-            color: "var(--text-primary)",
-            padding: "clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem)",
-            borderRadius: "50px",
-            fontWeight: "bold",
-            cursor: "pointer"
-          }}>
-          More
-        </button>
+        <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
+          {isAdmin && (
+            <button 
+              onClick={() => setIsEditModalOpen(true)}
+              className="pop-hover"
+              style={{
+                background: "transparent",
+                border: "1px solid var(--text-primary)",
+                color: "var(--text-primary)",
+                fontSize: "1.2rem",
+                cursor: "pointer",
+                width: "44px",
+                height: "44px",
+                borderRadius: "50%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+              </svg>
+            </button>
+          )}
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            style={{
+              background: "transparent",
+              border: "1px solid var(--text-primary)",
+              color: "var(--text-primary)",
+              padding: "clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem)",
+              borderRadius: "50px",
+              fontWeight: "bold",
+              cursor: "pointer"
+            }}>
+            More
+          </button>
+        </div>
       </div>
 
       {isModalOpen && (
@@ -88,6 +114,10 @@ export default function ActivityCard({ event }: { event: Activity }) {
             <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>📍 {event.location}</p>
           </div>
         </div>
+      )}
+
+      {isEditModalOpen && (
+        <ActivityFormModal initialData={event} onClose={() => setIsEditModalOpen(false)} />
       )}
     </>
   );
