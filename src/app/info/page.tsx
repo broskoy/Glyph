@@ -3,7 +3,7 @@ import CardCarousel from './CardCarousel';
 export default function Info() {
   return (
     <div style={{ padding: "clamp(6rem, 10vw, 8rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem)", maxWidth: "1000px", margin: "0 auto", overflow: "hidden" }}>
-      <h1 className="title-gradient" style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", marginBottom: "clamp(2rem, 4vw, 3rem)", textAlign: "center" }}>
+      <h1 className="title-gradient about-title" style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", textAlign: "center" }}>
         About Us
       </h1>
 
@@ -21,7 +21,7 @@ export default function Info() {
         </p>
 
         <h2 style={{ fontSize: "clamp(1.2rem, 4vw, 1.6rem)", marginBottom: "0.2rem", opacity: 0.9 }}>Events & Exhibitions</h2>
-        <p style={{ color: "var(--text-secondary)", marginBottom: "clamp(1.5rem, 5vw, 3.5rem)", fontSize: "clamp(1rem, 3vw, 1.2rem)" }}>
+        <p style={{ color: "var(--text-secondary)", marginBottom: "clamp(2rem, 5vw, 4rem)", fontSize: "clamp(1rem, 3vw, 1.2rem)" }}>
           Throughout the academic year, we host a variety of events ranging from casual critique nights and collaborative murals to formal, curated gallery exhibitions. Whether you are looking to network with other creatives or simply find inspiration, our doors are always open.
         </p>
       </div>

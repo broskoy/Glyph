@@ -56,8 +56,9 @@ h3 {
 }
 
 .title-gradient {
-  background: var(--gradient-warm);
+  background-image: var(--gradient-warm);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
@@ -73,23 +74,51 @@ h3 {
 
 /* Modal Animations */
 @keyframes fadeIn {
-  from { opacity: 0; backdrop-filter: blur(0px); }
-  to { opacity: 1; backdrop-filter: blur(8px); }
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; backdrop-filter: blur(8px); }
-  to { opacity: 0; backdrop-filter: blur(0px); }
+  from {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+
+  to {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px) scale(0.95); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @keyframes slideDown {
-  from { opacity: 1; transform: translateY(0) scale(1); }
-  to { opacity: 0; transform: translateY(20px) scale(0.95); }
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
 }
 
 .animate-fade-in {
@@ -109,10 +138,25 @@ h3 {
 }
 
 @keyframes shrinkFade {
-  0% { opacity: 0; transform: scale(1.15); }
-  20% { opacity: 1; transform: scale(1); }
-  80% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.95); }
+  0% {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+
+  20% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
 }
 
 .animate-shrink-fade {
@@ -121,11 +165,30 @@ h3 {
 }
 
 @keyframes popIn {
-  0% { opacity: 0; transform: translateY(20px) scale(0.8); }
-  20% { opacity: 1; transform: translateY(-5px) scale(1.05); }
-  30% { opacity: 1; transform: translateY(0) scale(1); }
-  80% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-10px) scale(0.9); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.05);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.9);
+  }
 }
 
 .animate-pop-in {
@@ -143,10 +206,83 @@ h3 {
 .nav-link-item:hover {
   background-image: var(--gradient-warm);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: pulse-gradient 2s linear infinite;
 }
 
 @keyframes pulse-gradient {
-  to { background-position: 200% center; }
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* --- Card Carousel Responsive Styles --- */
+/* Mobile */
+.carousel-container {
+  height: 440px;
+}
+
+.carousel-card {
+  max-width: 260px;
+  height: 350px;
+  padding: 1.4rem;
+}
+
+.carousel-name {
+  font-size: 1.4rem;
+}
+
+.carousel-role {
+  font-size: 0.8rem;
+}
+
+.carousel-email {
+  font-size: 0.75rem;
+}
+
+.carousel-image {
+  flex: 1;
+  min-height: 120px;
+  margin-bottom: 0.5rem;
+}
+
+.about-title {
+  margin-bottom: 0rem;
+  margin-left: 0rem;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .carousel-container {
+    height: 600px;
+  }
+
+  .carousel-card {
+    max-width: 360px;
+    height: 460px;
+    padding: 2rem;
+  }
+
+  .carousel-name {
+    font-size: 1.8rem;
+  }
+
+  .carousel-role {
+    font-size: 1.1rem;
+  }
+
+  .carousel-email {
+    font-size: 1rem;
+  }
+
+  .carousel-image {
+    min-height: 160px;
+    margin-bottom: 1rem;
+  }
+
+  .about-title {
+    margin-bottom: 0rem;
+    margin-left: 3rem;
+  }
 }
