@@ -26,7 +26,7 @@ export default async function AdminDashboard() {
   }));
 
   return (
-    <div style={{ padding: "4rem 2rem", maxWidth: "900px", margin: "0 auto" }}>
+    <div style={{ padding: "4rem 2rem", maxWidth: "1000px", margin: "0 auto" }}>
       <h1 className="title-gradient" style={{ fontSize: "3rem", marginBottom: "2rem" }}>Admin Dashboard</h1>
       <UserList initialUsers={plainUsers} currentUserId={parseInt((session.user as any).id)} />
     </div>

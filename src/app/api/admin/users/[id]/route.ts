@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   
   if (!session || (session.user as any).role !== "ADMIN") {
@@ -11,7 +11,8 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
   }
 
   try {
-    const userId = parseInt(params.id);
+    const resolvedParams = await params;
+    const userId = parseInt(resolvedParams.id);
 
     if (userId === parseInt((session.user as any).id)) {
       return NextResponse.json({ error: "Cannot delete your own account" }, { status: 400 });

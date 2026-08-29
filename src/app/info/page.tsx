@@ -2,7 +2,7 @@ import CardCarousel from './CardCarousel';
 
 export default function Info() {
   return (
-    <div style={{ padding: "clamp(6rem, 10vw, 8rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem)", maxWidth: "1200px", margin: "0 auto", overflow: "hidden" }}>
+    <div style={{ padding: "clamp(6rem, 10vw, 8rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem)", maxWidth: "1000px", margin: "0 auto", overflow: "hidden" }}>
       <h1 className="title-gradient" style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", marginBottom: "clamp(2rem, 4vw, 3rem)", textAlign: "center" }}>
         About Us
       </h1>
