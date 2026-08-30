@@ -116,7 +116,7 @@ export default function UploadModal() {
             background: 'rgba(255, 255, 255, 0.08)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
-            padding: 'clamp(1.5rem, 5vw, 3rem)',
+            padding: 'clamp(1rem, 5vw, 2rem)',
             borderRadius: '24px',
             border: '1px solid var(--glass-border)',
             width: '100%',
@@ -131,7 +131,7 @@ export default function UploadModal() {
               <button onClick={handleClose} style={{ color: 'var(--text-secondary)', fontSize: '1.5rem' }}>✕</button>
             </div>
 
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               
               {error && <div style={{ color: '#ff6b6b', background: 'rgba(255, 107, 107, 0.1)', padding: '1rem', borderRadius: '8px' }}>{error}</div>}
 
@@ -161,7 +161,7 @@ export default function UploadModal() {
                     background: previewUrl ? 'transparent' : 'rgba(0,0,0,0.3)',
                     position: 'relative',
                     overflow: 'hidden',
-                    minHeight: 'clamp(120px, 30vh, 200px)',
+                    minHeight: 'clamp(100px, 20vh, 160px)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',

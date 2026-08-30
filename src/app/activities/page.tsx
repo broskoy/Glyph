@@ -16,9 +16,9 @@ export default async function Activities() {
   });
 
   return (
-    <div style={{ padding: "clamp(6rem, 10vw, 8rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem)", maxWidth: "1000px", margin: "0 auto" }}>
-      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', gap: '1rem' }}>
-        <h1 className="title-gradient" style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", margin: 0 }}>
+    <div className="page-container">
+      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'clamp(1.5rem, 5vw, 3rem)', gap: '1rem' }}>
+        <h1 className="title-gradient" style={{ fontSize: "clamp(1.5rem, 5vw, 3rem)", margin: 0 }}>
           Upcoming Activities
         </h1>
         {isAdmin && <PostActivityButton />}

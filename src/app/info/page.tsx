@@ -3,7 +3,7 @@ import styles from './Info.module.css';
 
 export default function Info() {
   return (
-    <div style={{ padding: "clamp(6rem, 10vw, 8rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem)", maxWidth: "1000px", margin: "0 auto", overflow: "hidden" }}>
+    <div className="page-container" style={{ overflow: "hidden" }}>
       <h1 className={`title-gradient ${styles.aboutTitle}`} style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", textAlign: "center" }}>
         About Us
       </h1>

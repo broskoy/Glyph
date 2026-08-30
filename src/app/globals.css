@@ -216,3 +216,16 @@ h3 {
     background-position: 200% center;
   }
 }
+
+/* Page Container - Handles responsive top padding for navigation */
+.page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: clamp(5rem, 10vw, 6rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem);
+}
+
+@media (min-width: 768px) {
+  .page-container {
+    padding-top: 2rem; /* Start higher on desktop since nav is on the side */
+  }
+}

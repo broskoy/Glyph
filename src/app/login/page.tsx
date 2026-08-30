@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import styles from "./Login.module.css";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -40,33 +41,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{
-      minHeight: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "2rem"
-    }}>
+    <div className={styles.loginContainer}>
 
-      <div
-        className="animate-fade-in"
-        style={{
-          background: "rgba(255, 255, 255, 0.03)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          padding: "4rem 3rem",
-          borderRadius: "24px",
-          border: "1px solid var(--glass-border)",
-          width: "100%",
-          maxWidth: "450px",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
-          display: "flex",
-          flexDirection: "column",
-          gap: "2rem"
-        }}
-      >
+      <div className={`animate-fade-in ${styles.loginBox}`}>
         <div style={{ textAlign: "center" }}>
-          <h1 className="title-gradient" style={{ fontSize: "2.5rem", margin: "0 0 0.5rem 0" }}>Member Login</h1>
+          <h1 className={`title-gradient ${styles.loginTitle}`}>Member Login</h1>
         </div>
 
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
@@ -77,28 +56,29 @@ export default function LoginPage() {
             </div>
           )}
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <label htmlFor="username" style={{ fontSize: "0.9rem", color: "var(--text-secondary)" }}>Username</label>
+          <div className={styles.inputGroup}>
+            <label htmlFor="username" className={styles.inputLabel}>Username</label>
             <input
               id="username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="e.g. DigitalGhost99"
-              style={{ padding: "1.2rem", borderRadius: "12px", border: "1px solid var(--glass-border)", background: "rgba(0,0,0,0.3)", color: "white", fontSize: "1rem" }}
+              className={styles.loginInput}
               required
             />
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <label htmlFor="password" style={{ fontSize: "0.9rem", color: "var(--text-secondary)" }}>Password</label>
+          <div className={styles.inputGroup}>
+            <label htmlFor="password" className={styles.inputLabel}>Password</label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              style={{ padding: "1.2rem", borderRadius: "12px", border: "1px solid var(--glass-border)", background: "rgba(0,0,0,0.3)", color: "white", fontSize: "1rem", letterSpacing: password ? "0.2em" : "normal" }}
+              className={styles.loginInput}
+              style={{ letterSpacing: password ? "0.2em" : "normal" }}
               required
             />
           </div>
@@ -106,21 +86,8 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="pop-hover"
-            style={{
-              marginTop: "1rem",
-              padding: "1.2rem",
-              borderRadius: "12px",
-              background: "var(--gradient-warm)",
-              color: "white",
-              fontWeight: "900",
-              fontSize: "1.2rem",
-              border: "none",
-              cursor: isLoading ? "not-allowed" : "pointer",
-              boxShadow: "0 8px 20px rgba(255, 51, 102, 0.4)",
-              opacity: isLoading ? 0.7 : 1,
-              transition: "all 0.3s ease"
-            }}
+            className={`pop-hover ${styles.loginButton}`}
+            style={{ opacity: isLoading ? 0.7 : 1 }}
           >
             {isLoading ? "AUTHENTICATING..." : "ENTER"}
           </button>

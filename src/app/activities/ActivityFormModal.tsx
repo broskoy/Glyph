@@ -19,7 +19,7 @@ type ActivityFormModalProps = {
 
 export default function ActivityFormModal({ initialData, onClose }: ActivityFormModalProps) {
   const router = useRouter();
-  
+
   const isEditing = !!initialData;
 
   const [title, setTitle] = useState(initialData?.title || "");
@@ -62,7 +62,7 @@ export default function ActivityFormModal({ initialData, onClose }: ActivityForm
     if (!isEditing || !window.confirm("Are you sure you want to delete this activity? This cannot be undone.")) {
       return;
     }
-    
+
     setLoading(true);
     try {
       const res = await fetch(`/api/admin/activities/${initialData.id}`, {
@@ -104,19 +104,21 @@ export default function ActivityFormModal({ initialData, onClose }: ActivityForm
         width: "100%",
         maxWidth: "500px",
         boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
-        padding: "2.5rem 2rem",
+        padding: "clamp(1.5rem, 5vw, 2.5rem) clamp(1.5rem, 5vw, 2rem)",
         position: "relative"
       }}>
-        <button 
-          onClick={onClose}
-          style={{ position: "absolute", top: "1rem", right: "1.5rem", background: "none", border: "none", color: "var(--text-secondary)", fontSize: "1.5rem", cursor: "pointer" }}
-        >
-          ✕
-        </button>
-
-        <h2 style={{ margin: "0 0 1.5rem 0", fontSize: "1.8rem" }}>
-          {isEditing ? "Edit Activity" : "New Activity"}
-        </h2>
+        
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+          <h2 className="title-gradient" style={{ margin: 0, fontSize: "clamp(1.5rem, 5vw, 1.8rem)" }}>
+            {isEditing ? "Edit Activity" : "New Activity"}
+          </h2>
+          <button
+            onClick={onClose}
+            style={{ background: "none", border: "none", color: "var(--text-secondary)", fontSize: "1.5rem", cursor: "pointer", padding: 0 }}
+          >
+            ✕
+          </button>
+        </div>
 
         {error && <p style={{ color: "#ff6b6b", marginBottom: "1rem" }}>{error}</p>}
 
@@ -129,22 +131,22 @@ export default function ActivityFormModal({ initialData, onClose }: ActivityForm
             required
             style={{ padding: "0.8rem", borderRadius: "12px", background: "rgba(255, 255, 255, 0.05)", border: "1px solid var(--glass-border)", color: "white" }}
           />
-          
-          <div style={{ display: "flex", gap: "1rem" }}>
+
+          <div style={{ display: "flex", gap: "0.5rem" }}>
             <input
               type="text"
-              placeholder="Date (e.g. October 15, 2026)"
+              placeholder="Date"
               value={date}
               onChange={e => setDate(e.target.value)}
               required
-              style={{ flex: 1, padding: "0.8rem", borderRadius: "12px", background: "rgba(255, 255, 255, 0.05)", border: "1px solid var(--glass-border)", color: "white" }}
+              style={{ flex: 1, minWidth: 0, padding: "0.8rem", borderRadius: "12px", background: "rgba(255, 255, 255, 0.05)", border: "1px solid var(--glass-border)", color: "white" }}
             />
             <input
               type="text"
-              placeholder="Time (Optional)"
+              placeholder="Time"
               value={time}
               onChange={e => setTime(e.target.value)}
-              style={{ flex: 1, padding: "0.8rem", borderRadius: "12px", background: "rgba(255, 255, 255, 0.05)", border: "1px solid var(--glass-border)", color: "white" }}
+              style={{ flex: 1, minWidth: 0, padding: "0.8rem", borderRadius: "12px", background: "rgba(255, 255, 255, 0.05)", border: "1px solid var(--glass-border)", color: "white" }}
             />
           </div>
 
@@ -158,15 +160,15 @@ export default function ActivityFormModal({ initialData, onClose }: ActivityForm
           />
 
           <textarea
-            placeholder="Description (Optional)"
+            placeholder="Description"
             value={description}
             onChange={e => setDescription(e.target.value)}
             rows={4}
             style={{ padding: "0.8rem", borderRadius: "12px", background: "rgba(255, 255, 255, 0.05)", border: "1px solid var(--glass-border)", color: "white", resize: "vertical" }}
           />
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={loading}
             style={{
               padding: "1rem",
@@ -185,7 +187,7 @@ export default function ActivityFormModal({ initialData, onClose }: ActivityForm
         </form>
 
         {isEditing && (
-          <button 
+          <button
             onClick={handleDelete}
             disabled={loading}
             style={{
