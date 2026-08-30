@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Gallery.module.css';
 
@@ -16,10 +17,12 @@ type Artwork = {
   hasLiked: boolean;
 };
 
-export default function GalleryGrid({ initialArtworks }: { initialArtworks: Artwork[] }) {
+export default function GalleryGrid({ initialArtworks, isAdmin = false }: { initialArtworks: Artwork[], isAdmin?: boolean }) {
+  const router = useRouter();
   const [artworks, setArtworks] = useState<Artwork[]>(initialArtworks);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [ratios, setRatios] = useState<Record<number, number>>({});
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // When the parent Server Component refetches data after an upload, sync it to the client state
   useEffect(() => {
@@ -71,6 +74,22 @@ export default function GalleryGrid({ initialArtworks }: { initialArtworks: Artw
     if (ratio < 0.6) ratio = 0.6;
     
     setRatios(prev => ({ ...prev, [id]: ratio }));
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!window.confirm("Are you sure you want to delete this artwork? This cannot be undone.")) return;
+    
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`/api/admin/artworks/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error("Failed to delete");
+      setSelectedId(null);
+      router.refresh(); // Refresh the server component to get the updated list
+    } catch (e) {
+      alert("Failed to delete artwork. Please try again.");
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   const selectedArt = artworks.find(a => a.id === selectedId);
@@ -190,6 +209,38 @@ export default function GalleryGrid({ initialArtworks }: { initialArtworks: Artw
               >
                 ✕
               </button>
+
+              {/* Admin Delete Button */}
+              {isAdmin && (
+                <button 
+                  onClick={() => handleDelete(selectedArt.id)}
+                  disabled={isDeleting}
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: 'clamp(2rem, 5vw, 3rem)', 
+                    right: 'clamp(1.5rem, 5vw, 3rem)', 
+                    background: 'rgba(255, 107, 107, 0.2)', 
+                    color: '#ff6b6b', 
+                    border: '1px solid rgba(255, 107, 107, 0.4)', 
+                    borderRadius: '50%', 
+                    width: '44px', 
+                    height: '44px', 
+                    cursor: isDeleting ? 'not-allowed' : 'pointer', 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center',
+                    backdropFilter: 'blur(5px)',
+                    transition: 'all 0.2s ease',
+                    opacity: isDeleting ? 0.5 : 1
+                  }}
+                  title="Delete Artwork"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 6h18"></path>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  </svg>
+                </button>
+              )}
             </motion.div>
           </motion.div>
         )}

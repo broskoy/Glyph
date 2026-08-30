@@ -93,11 +93,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div style={{ textAlign: "center", marginTop: "1rem" }}>
-          <Link href="/" style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "0.9rem", transition: "color 0.2s ease" }} onMouseOver={e => e.currentTarget.style.color = "white"} onMouseOut={e => e.currentTarget.style.color = "var(--text-secondary)"}>
-            ← Return Home
-          </Link>
-        </div>
+
       </div>
     </div>
   );

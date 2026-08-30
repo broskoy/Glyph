@@ -10,6 +10,7 @@ export const dynamic = 'force-dynamic'
 export default async function Gallery() {
   const session = await getServerSession(authOptions);
   const currentUserId = session?.user ? parseInt((session.user as any).id) : null;
+  const isAdmin = session?.user ? (session.user as any).role === "ADMIN" : false;
 
   // We fetch securely on the server
   const artworks = await prisma.artwork.findMany({
@@ -41,7 +42,7 @@ export default async function Gallery() {
       </div>
       
       {/* We pass the data to a Client Component which handles the interactive Likes */}
-      <GalleryGrid initialArtworks={mappedArtworks} />
+      <GalleryGrid initialArtworks={mappedArtworks} isAdmin={isAdmin} />
     </div>
   )
 }
