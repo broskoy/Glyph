@@ -11,6 +11,7 @@ type Activity = {
   description: string | null;
 };
 import ActivityFormModal from "./ActivityFormModal";
+import styles from "./ActivityCard.module.css";
 
 export default function ActivityCard({ event, isAdmin = false }: { event: Activity, isAdmin?: boolean }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,65 +19,35 @@ export default function ActivityCard({ event, isAdmin = false }: { event: Activi
 
   return (
     <>
-      <div className="pop-hover" style={{
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        gap: "1rem",
-        justifyContent: "space-between",
-        alignItems: "center",
-        background: "rgba(255, 255, 255, 0.03)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        border: "1px solid var(--glass-border)",
-        borderRadius: "24px",
-        padding: "clamp(1rem, 3vw, 2rem)",
-        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
-      }}>
+      <div className={`pop-hover ${styles.card}`}>
         <div>
           <p style={{ color: "var(--accent-1)", fontWeight: "bold", marginBottom: "0.5rem", fontSize: "clamp(0.9rem, 3vw, 1rem)" }}>{event.date}</p>
           <h2 style={{ fontSize: "clamp(1.2rem, 4vw, 1.8rem)", marginBottom: "0.5rem" }}>{event.title}</h2>
           <p style={{ color: "var(--text-secondary)", fontSize: "clamp(0.9rem, 3vw, 1rem)" }}>📍 {event.location}</p>
         </div>
-        <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+        <div className={styles.buttonGroup}>
           {isAdmin && (
             <button 
               onClick={() => setIsEditModalOpen(true)}
-              className="pop-hover"
-              style={{
-                background: "transparent",
-                border: "1px solid var(--text-primary)",
-                color: "var(--text-primary)",
-                fontSize: "1.2rem",
-                cursor: "pointer",
-                width: "32px",
-                height: "32px",
-                borderRadius: "50%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-              }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              className={`pop-hover ${styles.iconButton}`}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
               </svg>
             </button>
           )}
           <button 
             onClick={() => setIsModalOpen(true)}
-            style={{
-              background: "transparent",
-              border: "1px solid var(--text-primary)",
-              color: "var(--text-primary)",
-              height: "32px",
-              padding: "0 0.8rem",
-              borderRadius: "50px",
-              fontWeight: "bold",
-              fontSize: "0.85rem",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center"
-            }}>
-            More
+            className={`pop-hover ${styles.moreButton}`}
+          >
+            <span className={styles.moreText}>More</span>
+            <span className={styles.moreDots}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="1"></circle>
+                <circle cx="19" cy="12" r="1"></circle>
+                <circle cx="5" cy="12" r="1"></circle>
+              </svg>
+            </span>
           </button>
         </div>
       </div>

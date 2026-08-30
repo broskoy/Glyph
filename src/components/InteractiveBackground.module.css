@@ -35,3 +35,20 @@
 .layer3 { z-index: 3; }
 .layer4 { z-index: 4; }
 .layer5 { z-index: 5; }
+
+.desktopWaves {
+  display: block;
+}
+
+.mobileWaves {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktopWaves {
+    display: none;
+  }
+  .mobileWaves {
+    display: block;
+  }
+}

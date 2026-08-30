@@ -44,14 +44,28 @@ export default function UserList({ initialUsers, currentUserId }: { initialUsers
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-        <h2 style={{ margin: 0, fontSize: "1.5rem" }}>Members List</h2>
+      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'clamp(1.5rem, 5vw, 3rem)', gap: '1rem' }}>
+        <h1 className="title-gradient" style={{ fontSize: "clamp(1.5rem, 5vw, 3rem)", margin: 0 }}>Admin Dashboard</h1>
         <button
           onClick={() => setIsModalOpen(true)}
           className="pop-hover"
-          style={{ padding: "0.6rem 1.5rem", background: "rgba(255, 255, 255, 0.08)", backdropFilter: "blur(20px)", color: "white", fontWeight: "bold", borderRadius: "50px", border: "1px solid var(--glass-border)", cursor: "pointer" }}
+          style={{
+            padding: 'clamp(0.4rem, 2vw, 0.8rem) clamp(1rem, 4vw, 1.8rem)',
+            background: 'var(--gradient-warm)',
+            border: 'none',
+            borderRadius: '24px',
+            color: 'white',
+            fontWeight: '900',
+            fontSize: 'clamp(0.85rem, 2vw, 1.2rem)',
+            cursor: 'pointer',
+            boxShadow: '0 8px 20px rgba(255, 51, 102, 0.4)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.4rem'
+          }}
         >
-          + Add
+          <span>ADD</span>
+          <span style={{ fontSize: 'clamp(1.2rem, 3vw, 2rem)', lineHeight: 0.8, fontWeight: '400' }}>+</span>
         </button>
       </div>
 
@@ -63,7 +77,6 @@ export default function UserList({ initialUsers, currentUserId }: { initialUsers
             <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
               <thead>
                 <tr style={{ background: "rgba(0,0,0,0.3)", color: "var(--text-secondary)", fontSize: "0.9rem" }}>
-                  <th style={{ padding: "1rem" }}>ID</th>
                   <th style={{ padding: "1rem" }}>Username</th>
                   <th style={{ padding: "1rem" }}>Role</th>
                   <th style={{ padding: "1rem" }}>Joined</th>
@@ -73,7 +86,6 @@ export default function UserList({ initialUsers, currentUserId }: { initialUsers
               <tbody>
                 {users.map(user => (
                   <tr key={user.id} style={{ borderTop: "1px solid var(--glass-border)" }}>
-                    <td style={{ padding: "1rem" }}>#{user.id}</td>
                     <td style={{ padding: "1rem", fontWeight: "bold" }}>{user.username}</td>
                     <td style={{ padding: "1rem" }}>
                       <span style={{
