@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
-
 :root {
   --bg-color: #000000;
   --text-primary: #111116;
@@ -57,7 +56,8 @@ h3 {
   aspect-ratio: 210 / 297;
   height: max(100vh, calc((100vw - 2 * var(--paper-gutter)) * 297 / 210));
   width: auto;
-  background: var(--bg-color) url('/paper_background.png') top center / cover no-repeat;
+  z-index: 0;
+  background: var(--bg-color) url('/top_paper.png') top center / cover no-repeat;
 }
 
 /* Screen is narrower than the paper — fill it instead */
@@ -172,79 +172,6 @@ h3 {
   animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes shrinkFade {
-  0% {
-    opacity: 0;
-    transform: scale(1.15);
-  }
-
-  20% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  80% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  100% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-}
-
-.animate-shrink-fade {
-  opacity: 0;
-  animation: shrinkFade 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes popIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px) scale(0.8);
-  }
-
-  20% {
-    opacity: 1;
-    transform: translateY(-5px) scale(1.05);
-  }
-
-  30% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  80% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.9);
-  }
-}
-
-.animate-pop-in {
-  opacity: 0;
-  display: inline-block;
-  animation: popIn 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Navigation Links */
-.nav-link-item {
-  display: inline-block;
-  background-size: 200% auto;
-}
-
-.nav-link-item:hover {
-  background-image: var(--gradient-warm);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: pulse-gradient 2s linear infinite;
-}
 
 @keyframes pulse-gradient {
   to {
@@ -252,15 +179,18 @@ h3 {
   }
 }
 
-/* Page Container - Handles responsive top padding for navigation */
 .page-container {
   max-width: 1000px;
   margin: 0 auto;
+  min-height: 100vh;
   padding: clamp(5rem, 10vw, 6rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem);
-}
 
-@media (min-width: 768px) {
-  .page-container {
-    padding-top: 2rem; /* Start higher on desktop since nav is on the side */
-  }
+  background-color: var(--bg-color);
+  background-image:
+    url('/top_paper.png'),
+    url('/bottom_paper.png'),
+    url('/middle_paper.png');
+  background-repeat:   no-repeat,   no-repeat,     repeat-y;
+  background-position: center top,  center bottom, center top;
+  background-size:     100% auto,   100% auto,     100% auto;
 }

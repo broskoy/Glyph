@@ -1,8 +1,0 @@
-.background {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -2;
-  background: var(--bg-color) url('/main_background.png') center / cover no-repeat;
-}

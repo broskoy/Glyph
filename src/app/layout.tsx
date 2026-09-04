@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Background from "@/components/Background";
-import UserMenu from "@/components/UserMenu";
 import Providers from "@/components/Providers";
 
 export const metadata: Metadata = {
@@ -20,7 +19,6 @@ export default function RootLayout({
         <Providers>
           <Background />
           <Navigation />
-          <UserMenu />
           <main style={{ minHeight: "calc(100vh - 80px)", position: "relative", zIndex: 1, isolation: "isolate" }}>
             {children}
           </main>

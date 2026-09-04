@@ -1,0 +1,25 @@
+.background {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background: var(--bg-color) url('/main_background.png') center / cover no-repeat;
+}
+
+.navigation-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: min(30vh, calc((100vw - 2rem) * 300 / 1200));
+  aspect-ratio: 1200 / 300;
+  width: auto;
+  z-index: 1;
+  container-type: size;
+  background: url('/navigation_background.png') top left / contain no-repeat;
+}
+
+.navigation-background a,
+.navigation-background button {
+  font-size: min(3vh, calc((100vw - 8rem) * 0.035));
+}

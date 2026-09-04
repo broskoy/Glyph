@@ -1,68 +1,31 @@
 "use client";
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import "./General.css";
 
 export default function Navigation() {
   const pathname = usePathname();
+  const [shifted, setShifted] = useState(false);
 
   const links = [
-    {
-      name: 'Home',
-      href: '/',
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-          <polyline points="9 22 9 12 15 12 15 22" />
-        </svg>
-      )
-    },
-    {
-      name: 'Gallery',
-      href: '/gallery',
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-          <circle cx="8.5" cy="8.5" r="1.5" />
-          <polyline points="21 15 16 10 5 21" />
-        </svg>
-      )
-    },
-    {
-      name: 'Activities',
-      href: '/activities',
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-          <line x1="16" y1="2" x2="16" y2="6" />
-          <line x1="8" y1="2" x2="8" y2="6" />
-          <line x1="3" y1="10" x2="21" y2="10" />
-        </svg>
-      )
-    },
-    {
-      name: 'Info',
-      href: '/info',
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-          <polyline points="14 2 14 8 20 8" />
-          <line x1="16" y1="13" x2="8" y2="13" />
-          <line x1="16" y1="17" x2="8" y2="17" />
-          <polyline points="10 9 9 9 8 9" />
-        </svg>
-      )
-    },
+    { name: '',           href: '/',      top: '15%', left: '7%' },
+    { name: 'LOGIN',      href: '/login',      top: '15%', left: '21.25%' },
+    { name: 'HOME',       href: '/',           top: '15%', left: '35.25%' },
+    { name: 'ART',        href: '/gallery',    top: '15%', left: '49.5%' },
+    { name: 'ACTIVITIES', href: '/activities', top: '15%', left: '63.75%' },
+    { name: 'INFO',       href: '/info',       top: '15%', left: '78%' },
   ];
 
   return (
-    <nav style={{
+    <nav className="navigation-background" style={{
       position: 'fixed',
-      top: 'clamp(1rem, 3vw, 2rem)',
-      left: 'clamp(1rem, 3vw, 2rem)',
+      top: 0,
+      left: 0,
       zIndex: 100,
-      display: 'flex',
-      gap: 'clamp(0.5rem, 2vw, 1rem)'
+      transform: shifted ? 'translateX(0%)' : 'translateX(-85%)',
+      transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
     }}>
       {links.map((link) => {
         const isActive = pathname === link.href;
@@ -71,26 +34,38 @@ export default function Navigation() {
           <Link
             key={link.name}
             href={link.href}
-            title={link.name}
             className="pop-hover"
             style={{
-              background: isActive ? "rgba(255, 255, 255, 0.15)" : "rgba(255, 255, 255, 0.05)",
-              border: isActive ? "1px solid rgba(255, 255, 255, 0.3)" : "1px solid var(--glass-border)",
-              borderRadius: "50%",
-              width: "clamp(2.5rem, 8vw, 3.5rem)",
-              height: "clamp(2.5rem, 8vw, 3.5rem)",
+              position: 'absolute',
+              top: link.top,
+              left: link.left,
+              transform: 'translate(-50%, -50%)',
               color: isActive ? "white" : "var(--text-secondary)",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backdropFilter: "blur(10px)",
-              transition: "all 0.2s ease"
+              whiteSpace: "nowrap",
+              transition: "all 0.2s ease",
             }}
           >
-            {link.icon}
+            {link.name}
           </Link>
         );
       })}
+
+      <button
+        onClick={() => setShifted(!shifted)}
+        aria-expanded={shifted}
+        aria-label={shifted ? "Move navigation back" : "Move navigation right"}
+        className="pop-hover nav-toggle"
+        style={{
+          position: 'absolute',
+          top: '15%',
+          left: '92%',
+          transform: 'translate(-50%, -50%)',
+          color: "var(--text-secondary)",
+          transition: "all 0.2s ease",
+        }}
+      >
+        {shifted ? 'MENU' : 'MENU'}
+      </button>
     </nav>
   );
 }

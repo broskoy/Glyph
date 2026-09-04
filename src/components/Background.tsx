@@ -1,4 +1,4 @@
-import "./Background.css";
+import "./General.css";
 
 export default function Background() {
   return <div className="background" />;
