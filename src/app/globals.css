@@ -8,7 +8,7 @@
   /* Vibrant pink */
   --accent-3: #00d2ff;
   /* Electric blue */
-  --paper-gutter: clamp(1rem, 6vw, 8rem);
+  --paper-gutter: 20vw;
   --gradient-warm: linear-gradient(135deg, var(--accent-1), var(--accent-2));
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
@@ -48,17 +48,36 @@ h3 {
   letter-spacing: -0.02em;
 }
 
+
 .paper-background {
   position: fixed;
   top: 0;
-  left: var(--paper-gutter);
-  right: var(--paper-gutter);
+  left: 50%;
+  transform: translateX(-50%);  right: var(--paper-gutter);
   width: auto;
-  height: auto;
+  height: max(100vh, calc((100vw - 2 * var(--paper-gutter)) * 297 / 210));
   aspect-ratio: 210 / 297;
   z-index: -1;
-  background: url('/paper_background.png') top center / cover no-repeat;
+  background: var(--bg-color) url('/paper_background.png') top center / cover no-repeat;
 }
+
+.logo-center {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-60%);
+  width: 40%;
+}
+
+.logo,
+.text-logo
+{
+  width: 120%;
+  height: auto;
+  display: block;
+}
+
+.text-logo{ margin-top: 6%; }
 
 .title-gradient {
   background-image: var(--gradient-warm);
