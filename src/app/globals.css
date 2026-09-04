@@ -53,12 +53,23 @@ h3 {
   position: fixed;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);  right: var(--paper-gutter);
-  width: auto;
-  height: max(100vh, calc((100vw - 2 * var(--paper-gutter)) * 297 / 210));
+  transform: translateX(-50%);
   aspect-ratio: 210 / 297;
-  z-index: -1;
+  height: max(100vh, calc((100vw - 2 * var(--paper-gutter)) * 297 / 210));
+  width: auto;
   background: var(--bg-color) url('/paper_background.png') top center / cover no-repeat;
+}
+
+/* Screen is narrower than the paper — fill it instead */
+@media (max-aspect-ratio: 210/297) {
+  .paper-background {
+    left: 0;
+    transform: none;
+    width: 100vw;
+    height: 100vh;
+    aspect-ratio: auto;
+    background-size: 100% 100%;   /* stretch to fit exactly */
+  }
 }
 
 .logo-center {
