@@ -1,17 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
 
 :root {
-  --bg-color: #111116;
-  --text-primary: #ffffff;
-  --text-secondary: #a3a3b0;
+  --bg-color: #000000;
+  --text-primary: #111116;
 
   --accent-1: #ff3366;
   /* Vibrant pink */
-  --accent-2: #8a2be2;
-  /* Deep purple */
   --accent-3: #00d2ff;
   /* Electric blue */
-
+  --paper-gutter: clamp(1rem, 6vw, 8rem);
   --gradient-warm: linear-gradient(135deg, var(--accent-1), var(--accent-2));
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
@@ -29,10 +26,6 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
-  /* Add a warm, colorful glow to the background so it doesn't feel cold */
-  background-image:
-    radial-gradient(circle at 15% 50%, rgba(255, 51, 102, 0.08), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(0, 210, 255, 0.08), transparent 25%);
 }
 
 a {
@@ -53,6 +46,18 @@ h2,
 h3 {
   font-weight: 800;
   letter-spacing: -0.02em;
+}
+
+.paper-background {
+  position: fixed;
+  top: 0;
+  left: var(--paper-gutter);
+  right: var(--paper-gutter);
+  width: auto;
+  height: auto;
+  aspect-ratio: 210 / 297;
+  z-index: -1;
+  background: url('/paper_background.png') top center / cover no-repeat;
 }
 
 .title-gradient {
