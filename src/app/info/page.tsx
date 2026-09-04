@@ -3,7 +3,7 @@ import styles from './Info.module.css';
 
 export default function Info() {
   return (
-    <div className="page-container">
+    <div className="paper-page-container">
       <h1 className={`title-gradient ${styles.aboutTitle}`} style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", textAlign: "center" }}>
         About Us
       </h1>
