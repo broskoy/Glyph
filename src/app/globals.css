@@ -47,19 +47,6 @@ h3 {
   letter-spacing: -0.02em;
 }
 
-
-.paper-background {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  aspect-ratio: 210 / 297;
-  height: max(100vh, calc((100vw - 2 * var(--paper-gutter)) * 297 / 210));
-  width: auto;
-  z-index: 0;
-  background: var(--bg-color) url('/top_paper.png') top center / cover no-repeat;
-}
-
 /* Screen is narrower than the paper — fill it instead */
 @media (max-aspect-ratio: 210/297) {
   .paper-background {
@@ -74,10 +61,10 @@ h3 {
 
 .logo-center {
   position: absolute;
-  top: 8%;
+  top: 15%;
   left: 50%;
   transform: translateX(-60%);
-  width: 40%;
+  width: 20%;
 }
 
 .logo,
@@ -105,31 +92,6 @@ h3 {
 
 .pop-hover:hover {
   transform: scale(1.05);
-}
-
-/* Modal Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    backdrop-filter: blur(0px);
-  }
-
-  to {
-    opacity: 1;
-    backdrop-filter: blur(8px);
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    backdrop-filter: blur(8px);
-  }
-
-  to {
-    opacity: 0;
-    backdrop-filter: blur(0px);
-  }
 }
 
 @keyframes slideUp {
@@ -200,4 +162,16 @@ h3 {
   background-repeat:   no-repeat,   no-repeat,     repeat-y;
   background-position: center top,  center bottom, center top;
   background-size:     100% auto,   100% auto,     100% auto;
+}
+
+.paper-background {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  aspect-ratio: 220 / 300;
+  height: max(100vh, calc((100vw - 2 * var(--paper-gutter)) * 300 / 220));
+  width: auto;
+  z-index: 0;
+  background: var(--bg-color) url('/top_paper.png') top center / cover no-repeat;
 }

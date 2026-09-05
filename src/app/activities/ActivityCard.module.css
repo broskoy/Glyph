@@ -1,26 +1,114 @@
+.cardWrap {
+  position: relative;
+}
+
+/* The whole paper strip is the button */
 .card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  aspect-ratio: 844 / 329;
+  width: 100%;
+  min-height: fit-content;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-primary);
+  /* The paper strip. 100% 100% stretches it to whatever the card becomes,
+     which keeps the sprocket holes pinned to the left and right edges. */
+  background: url('/announcement.png') center / 100% 100% no-repeat;
+
+  /* Horizontal padding clears the sprocket holes (~8% of the width each side) */
+  padding: clamp(1.25rem, 3.5vw, 2.25rem) clamp(2.5rem, 8%, 5rem);
+  min-height: clamp(150px, 24vw, 230px);
+
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--accent-1);
+  outline-offset: 4px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Local fade — deliberately NOT the global .animate-fade-in, whose
+   keyframes end on backdrop-filter: blur(8px) with `forwards`. */
+@keyframes cardFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fade {
+  animation: cardFade 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---- Front: date / title / location ---- */
+
+.summary {
+  min-width: 0;
+}
+
+.date {
+  color: var(--accent-1);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+}
+
+.title {
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  margin-bottom: 0.5rem;
+}
+
+.location {
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  opacity: 0.75;
+}
+
+/* ---- Back: description + photo, same slot ---- */
+
+.details {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  padding: clamp(1rem, 3vw, 2rem);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  gap: clamp(1rem, 3vw, 2rem);
+  min-width: 0;
 }
 
-.buttonGroup {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
+.detailsText {
+  flex: 1;
+  min-width: 0;
 }
+
+.description {
+  font-size: clamp(0.9rem, 2.6vw, 1rem);
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.photo {
+  position: relative;
+  flex-shrink: 0;
+  width: clamp(90px, 22%, 200px);
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ---- Admin edit button, layered over the strip ---- */
 
 .iconButton {
+  position: absolute;
+  top: clamp(0.75rem, 2vw, 1.25rem);
+  right: clamp(2.5rem, 8%, 5rem);
+  z-index: 2;
   background: transparent;
   border: 1px solid var(--text-primary);
   color: var(--text-primary);
@@ -32,63 +120,35 @@
   width: 44px;
   height: 44px;
 }
+
 .iconButton svg {
   width: 18px;
   height: 18px;
 }
 
-.moreButton {
-  background: transparent;
-  border: 1px solid var(--text-primary);
-  color: var(--text-primary);
-  border-radius: 50px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 44px;
-  padding: 0 1.5rem;
-  font-size: 1rem;
-}
-
-.moreText {
-  display: inline;
-}
-
-.moreDots {
-  display: none;
-}
-
 @media (max-width: 600px) {
-  .buttonGroup {
-    flex-direction: column;
-    gap: 0.8rem;
+  .card {
+    padding: 1.25rem clamp(2rem, 9%, 3rem);
   }
-  
+
+  .details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .photo {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
   .iconButton {
     width: 32px;
     height: 32px;
   }
+
   .iconButton svg {
     width: 14px;
     height: 14px;
-  }
-
-  .moreButton {
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    border-radius: 50%;
-  }
-
-  .moreText {
-    display: none;
-  }
-  
-  .moreDots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }

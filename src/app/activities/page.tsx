@@ -18,9 +18,6 @@ export default async function Activities() {
   return (
     <div className="page-container">
       <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'clamp(1.5rem, 5vw, 3rem)', gap: '1rem' }}>
-        <h1 className="title-gradient" style={{ fontSize: "clamp(1.5rem, 5vw, 3rem)", margin: 0 }}>
-          Upcoming Activities
-        </h1>
         {isAdmin && <PostActivityButton />}
       </div>
 

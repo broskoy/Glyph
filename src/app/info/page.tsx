@@ -1,13 +1,8 @@
 import InfoCards from './InfoCards';
-import styles from './Info.module.css';
 
 export default function Info() {
   return (
     <div className="paper-page-container">
-      <h1 className={`title-gradient ${styles.aboutTitle}`} style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)", textAlign: "center"}}>
-        About Us
-      </h1>
-
       <InfoCards />
       <div style={{ marginTop: "clamp(3rem, 6vw, 4rem)", maxWidth: "800px", margin: "0 auto" }}>
         <h2 style={{ fontSize: "clamp(1.2rem, 4vw, 1.6rem)", marginBottom: "0.2rem", opacity: 0.9 }}>Who are we?</h2>

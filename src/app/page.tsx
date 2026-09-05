@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="paper-background">
+    <div className="paper-page-container">
       <div className="logo-center">
         <Image
           src="/glyphPaperLogo.png"
