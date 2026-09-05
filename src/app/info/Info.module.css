@@ -1,31 +1,51 @@
-/* --- Card Carousel Responsive Styles --- */
-/* Mobile */
-.carouselContainer {
-  height: 440px;
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-.carouselCard {
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   max-width: 260px;
-  height: 350px;
-  padding: 1.4rem;
 }
 
-.carouselName {
-  font-size: 1.4rem;
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
 }
 
-.carouselRole {
-  font-size: 0.8rem;
+.text {
+  margin-top: -1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center top;
+  line-height: 1.5;
 }
 
-.carouselEmail {
-  font-size: 0.75rem;
+.button {
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-.carouselImage {
-  flex: 1;
-  min-height: 50px;
-  margin-bottom: 0.5rem;
+.button:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .aboutTitle {
@@ -33,37 +53,28 @@
   margin-left: 0rem;
 }
 
-/* Desktop */
+:global(p) {
+  font-weight: 500;
+}
+
 @media (min-width: 768px) {
-  .carouselContainer {
-    height: 600px;
+  .carousel {
+    gap: 1.5rem;
+    margin-top: -2.5rem; 
   }
 
-  .carouselCard {
-    max-width: 360px;
-    height: 460px;
-    padding: 2rem;
+  .container {
+    max-width: 480px;
   }
 
-  .carouselName {
-    font-size: 1.8rem;
+  .text {
+    font-size: 1.05rem;
+    margin-top: 0.75rem; 
   }
 
-  .carouselRole {
-    font-size: 1.1rem;
-  }
-
-  .carouselEmail {
-    font-size: 1rem;
-  }
-
-  .carouselImage {
-    min-height: 160px;
-    margin-bottom: 1rem;
-  }
-
-  .aboutTitle {
-    margin-bottom: 0rem;
-    margin-left: 3rem;
+  .button {
+    width: 3.25rem;
+    height: 3.25rem;
+    font-size: 2rem;
   }
 }
